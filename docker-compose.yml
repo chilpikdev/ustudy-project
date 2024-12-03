@@ -39,7 +39,7 @@ services:
     container_name: project_mysql
     networks:
       - project_network
-    
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: project_pma
@@ -56,8 +56,27 @@ services:
     networks:
       - project_network
 
+  redis:
+    image: redis:latest
+    container_name: project_redis
+    command:
+      [
+          "sh",
+          "-c",
+          "redis-server --requirepass $${REDIS_PASSWORD}"
+      ]
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    networks:
+      - project_network
+
 networks:
-  project_network: 
+  project_network:
     driver: bridge
 
 volumes:
@@ -66,4 +85,6 @@ volumes:
   nginx_logs:
     driver: local
   mysql_data:
+    driver: local
+  redis_data:
     driver: local
