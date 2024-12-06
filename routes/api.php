@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\PostController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('posts', [PostController::class, 'posts']);
+Route::prefix('core/v1')->group(base_path('routes/core/api_v1.php'));
