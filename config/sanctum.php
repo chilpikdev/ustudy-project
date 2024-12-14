@@ -46,6 +46,8 @@ return [
     |
     */
 
+    'at_expiration' => 60,
+    'rt_expiration' => 60 * 24 * 90,
     'expiration' => null,
 
     /*
