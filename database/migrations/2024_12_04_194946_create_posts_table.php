@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
+            $table->bigInteger('view')->default(0);
+            $table->bigInteger('shared')->default(0);
+            $table->boolean('recommended')->default(false);
             $table->timestamps();
         });
     }

@@ -2,25 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Actions\Core\v1\Posts\IndexAction;
+use App\Dto\Core\v1\Posts\IndexDto;
+use App\Http\Requests\Core\v1\Posts\IndexRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
 
 class PostController extends Controller
 {
-    public function posts(): JsonResponse
-    {
-        $data = Cache::remember('posts', now()->addMinute(), function () {
-            $items = Post::query();
-            return $items->paginate(perPage: 10, page: 1);
-        });
 
-        return response()->json([
-            'count' => count($data),
-            'ttl' => Redis::ttl(config('cache.prefix') . 'posts'),
-            'data' => $data->items()
-        ]);
+    public function posts(IndexRequest $request, IndexAction $action): JsonResponse
+    {
+        return $action(IndexDto::from($request));
     }
 }

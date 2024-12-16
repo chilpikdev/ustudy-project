@@ -2,60 +2,24 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\Core\v1\Auth\LoginAction;
+use App\Dto\Core\v1\Auth\LoginDto;
 use App\Enums\TokenAbilityEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Models\User;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Core\v1\Auth\LoginRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AuthController extends Controller
 {
     /**
      * Summary of login
-     * @param \App\Http\Requests\Auth\LoginRequest $request
-     * @throws \Illuminate\Auth\AuthenticationException
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @return mixed|\Illuminate\Http\JsonResponse
+     * @param \App\Http\Requests\Core\v1\Auth\LoginRequest $request
+     * @param \App\Actions\Core\v1\Auth\LoginAction $action
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request, LoginAction $action): JsonResponse
     {
-        try {
-            $user = User::where('email', $request->email)->firstOrFail();
-
-            if (!Hash::check($request->password, $user->password)) {
-                throw new AuthenticationException();
-            }
-
-            auth()->login($user);
-
-            $accessTokenExpiration = now()->addMinutes(config('sanctum.ac_expiration'));
-            $refreshTokenExpiration = now()->addMinutes(config('sanctum.rt_expiration'));
-
-            $accessToken =  auth()->user()->createToken(
-                name: 'access token',
-                abilities: [TokenAbilityEnum::ACCESS_TOKEN->value],
-                expiresAt: $accessTokenExpiration
-            );
-
-            $refreshToken =  auth()->user()->createToken(
-                name: 'refresh token',
-                abilities: [TokenAbilityEnum::ISSUE_ACCESS_TOKEN->value],
-                expiresAt: $refreshTokenExpiration
-            );
-
-            return response()->json([
-                'access_token' => $accessToken->plainTextToken,
-                'refresh_token' => $refreshToken->plainTextToken,
-                'at_expired_at' => $accessTokenExpiration->format('Y-m-d H:i:s'),
-                'rf_expired_at' => $refreshTokenExpiration->format('Y-m-d H:i:s'),
-            ]);
-        } catch (ModelNotFoundException $ex) {
-            throw new ModelNotFoundException("paydalaniwshi tabilmadi");
-        }
+        return $action(LoginDto::from($request));
     }
 
     /**

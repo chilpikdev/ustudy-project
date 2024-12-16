@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Core\v1\Posts;
 
 use App\Http\Requests\Traits\FailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class IndexRequest extends FormRequest
 {
     use FailedValidation;
-    
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -25,8 +25,12 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|string|email',
-            'password' => 'required|string|min:8'
+            'perpage' => 'nullable|integer|min:1|max:50',
+            'page' => ['nullable', 'integer', 'min:1'],
+            'search' => 'nullable|string|min:4',
+            'from' => 'nullable|date|date_format:Y-m-d|required_with:to',
+            'to' => 'nullable|date|date_format:Y-m-d|required_with:from',
+            'sort' => 'nullable|string|in:popular,recommended'
         ];
     }
 }

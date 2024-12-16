@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
             'password' => 12345678
         ]);
 
-        // Post::factory(500)->create();
+        Post::factory(500)->create();
     }
 }
