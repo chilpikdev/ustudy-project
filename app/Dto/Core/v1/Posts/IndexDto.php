@@ -4,7 +4,7 @@ namespace App\Dto\Core\v1\Posts;
 
 use App\Http\Requests\Core\v1\Posts\IndexRequest;
 
-class IndexDto
+readonly class IndexDto
 {
     public function __construct(
         public ?int $perPage,
