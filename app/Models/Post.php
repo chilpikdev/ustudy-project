@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
@@ -12,6 +13,7 @@ class Post extends Model
     protected $table = 'posts';
 
     protected $fillable = [
+        'user_id',
         'title',
         'description',
         'view',
@@ -27,5 +29,10 @@ class Post extends Model
         return [
             'recommended' => 'bool',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
