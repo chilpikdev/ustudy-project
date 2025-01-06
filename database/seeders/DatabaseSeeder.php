@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 12345678
-        ]);
+        ])->point()->create();
 
-        User::factory(9)->create();
+        User::factory(9)->create()->map(fn ($user) => $user->point()->create());
         Post::factory(500)->create();
     }
 }
