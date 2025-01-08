@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
 
         User::factory(9)->create()->map(fn ($user) => $user->point()->create());
         Post::factory(500)->create();
+
+        $this->call([
+            TagSeeder::class
+        ]);
     }
 }
