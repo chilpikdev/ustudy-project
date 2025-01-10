@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Casts\PasswordAttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,6 +24,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'country_id',
         'name',
         'email',
         'password',
@@ -49,6 +51,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => PasswordAttributeCast::class,
         ];
+    }
+
+    /**
+     * Summary of country
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 
     /**
