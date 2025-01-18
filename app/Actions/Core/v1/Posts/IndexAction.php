@@ -4,11 +4,13 @@ namespace App\Actions\Core\v1\Posts;
 
 use App\Actions\Traits\GenerateKeyCacheTrait;
 use App\Dto\Core\v1\Posts\IndexDto;
+use App\Exceptions\ApiResponseException;
 use App\Http\Resources\Core\v1\Posts\PostCollection;
 use App\Models\Post;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class IndexAction
 {
@@ -58,5 +60,34 @@ class IndexAction
                 ]
             ],
         );
+    }
+
+    public function test()
+    {
+        try {
+            DB::beginTransaction();
+
+
+
+            if (!false) {
+                DB::rollBack();
+            }
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            //throw $th;
+        }
+    }
+
+    public function test2()
+    {
+        DB::transaction(function () {
+
+            if (0 < 0) {
+                throw new ApiResponseException("Balanstag'i pul jetpey qaldi", 400);
+            }
+
+        });
     }
 }
