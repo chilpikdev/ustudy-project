@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
@@ -20,6 +19,7 @@ class Post extends Model
         'user_id',
         'title',
         'description',
+        'content',
         'view',
         'shared',
         'recommended',
@@ -48,17 +48,8 @@ class Post extends Model
      * Summary of tags
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    // public function tags(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Tag::class, 'posts_tags', 'post_id', 'tag_id');
-    // }
-
-    /**
-     * Summary of tags
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
-    public function tags(): MorphToMany
+    public function tags(): BelongsToMany
     {
-        return $this->morphToMany(Tag::class, 'taggable');
+        return $this->belongsToMany(Tag::class, 'posts_tags', 'post_id', 'tag_id');
     }
 }

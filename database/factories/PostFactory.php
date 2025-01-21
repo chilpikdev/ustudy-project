@@ -21,6 +21,7 @@ class PostFactory extends Factory
             'user_id' => User::inRandomOrder()->first()->id,
             'title' => fake()->text(),
             'description' => fake()->realText(255),
+            'content' => fake()->realText(1000),
             'view' => fake()->randomNumber(),
             'shared' => fake()->randomNumber(),
             'recommended' => fake()->boolean(),

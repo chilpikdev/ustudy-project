@@ -13,17 +13,15 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('user_id');
             $table->foreignId('user_id')->constrained('users', 'id')->restrictOnDelete()->cascadeOnUpdate();
             $table->string('title');
             $table->string('description');
+            $table->text('content');
             $table->bigInteger('view')->default(0);
             $table->bigInteger('shared')->default(0);
             $table->boolean('recommended')->default(false);
             $table->timestamps();
             $table->softDeletes();
-
-            // $table->foreign('user_id')->on('users')->references('id')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 
