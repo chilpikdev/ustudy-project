@@ -26,15 +26,22 @@ Route::prefix('posts')->group(function () {
  */
 Route::prefix('auth')->middleware('guest:sanctum')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
+    Route::post('registration', [AuthController::class, 'regtration']);
 });
 
 /**
- * Auth
+ * Auth for Refresh Token
  */
 Route::prefix('auth')->middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ISSUE_ACCESS_TOKEN->value])->group(function () {
     Route::post('refresh-token', [AuthController::class, 'refreshToken']);
 });
 
-Route::prefix('auth')->middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->value])->group(function () {
-    Route::post('logout', [AuthController::class, 'logout']);
+/**
+ * Routs for Auth & Verified Users
+ */
+Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->value])->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::get('me', [AuthController::class, 'me']);
+        Route::post('logout', [AuthController::class, 'logout']);
+    });
 });

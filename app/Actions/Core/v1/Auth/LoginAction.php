@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class LoginAction
@@ -24,7 +23,7 @@ class LoginAction
 
             auth()->login($user);
 
-            $accessTokenExpiration = now()->addMinutes(config('sanctum.ac_expiration'));
+            $accessTokenExpiration = now()->addMinutes(config('sanctum.at_expiration'));
             $refreshTokenExpiration = now()->addMinutes(config('sanctum.rt_expiration'));
 
             $accessToken =  auth()->user()->createToken(
