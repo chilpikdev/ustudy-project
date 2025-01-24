@@ -26,7 +26,7 @@ Route::prefix('posts')->group(function () {
  */
 Route::prefix('auth')->middleware('guest:sanctum')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
-    Route::post('registration', [AuthController::class, 'regtration']);
+    Route::post('registration', [AuthController::class, 'registration']);
 });
 
 /**

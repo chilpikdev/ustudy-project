@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Actions\Core\v1\Auth\GetMeAction;
 use App\Actions\Core\v1\Auth\LoginAction;
+use App\Actions\Core\v1\Auth\RefreshTokenAction;
 use App\Actions\Core\v1\Auth\RegistrationAction;
 use App\Dto\Core\v1\Auth\LoginDto;
 use App\Dto\Core\v1\Auth\RegistrationDto;
-use App\Enums\TokenAbilityEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Core\v1\Auth\LoginRequest;
 use App\Http\Requests\Core\v1\Auth\RegistrationRequest;
@@ -39,22 +39,12 @@ class AuthController extends Controller
 
     /**
      * Summary of refreshToken
+     * @param \App\Actions\Core\v1\Auth\RefreshTokenAction $action
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function refreshToken(): JsonResponse
+    public function refreshToken(RefreshTokenAction $action): JsonResponse
     {
-        $accessTokenExpiration = now()->addMinutes(config('sanctum.at_expiration'));
-
-        $accessToken =  auth()->user()->createToken(
-            name: 'access token',
-            abilities: [TokenAbilityEnum::ACCESS_TOKEN->value],
-            expiresAt: $accessTokenExpiration
-        );
-
-        return response()->json([
-            'access_token' => $accessToken->plainTextToken,
-            'at_expired_at' => $accessTokenExpiration->format('Y-m-d H:i:s'),
-        ]);
+        return $action();
     }
 
     /**
@@ -73,7 +63,7 @@ class AuthController extends Controller
      */
     public function logout(): JsonResponse
     {
-        auth()->user()->currentAccessToken()->delete();
+        auth()->user()->tokens()->delete();
 
         return response()->json([
             'message' => "You're logout"
