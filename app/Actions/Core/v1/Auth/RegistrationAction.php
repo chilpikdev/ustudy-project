@@ -20,10 +20,12 @@ class RegistrationAction
             'password' => $dto->password
         ];
 
-        User::create($data);
+        $user = User::create($data);
+
+        $user->sendEmailVerificationNotification();
 
         return static::toResponse(
-            message: "Paydalaniwshi jaratildi!"
+            message: "Paydalaniwshi jaratildi, ko'rsetilgen email addressin'izdi tastiyiqlaw ushin pochtan'izg'a xat ketti"
         );
     }
 }
