@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Middleware\IsVerifiedEmail;
+use App\Http\Middleware\HasVerifiedEmail;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'abilities' => CheckAbilities::class,
             'ability' => CheckForAnyAbility::class,
-            'verified' => IsVerifiedEmail::class,
+            'verified' => HasVerifiedEmail::class,
         ]);
         $middleware->group('api', [
             \App\Http\Middleware\ApiJson::class,

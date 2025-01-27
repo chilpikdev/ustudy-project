@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsVerifiedEmail
+class HasVerifiedEmail
 {
     /**
      * Handle an incoming request.
