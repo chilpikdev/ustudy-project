@@ -2,14 +2,22 @@
 
 namespace App\Actions\Core\v1\Auth;
 
+use App\Actions\Core\v1\Auth\Otp\SendAction;
 use App\Dto\Core\v1\Auth\RegistrationDto;
-use App\Models\User;
 use App\Traits\ResponseTrait;
+use Cache;
 use Illuminate\Http\JsonResponse;
 
 class RegistrationAction
 {
     use ResponseTrait;
+
+    public SendAction $sendAction;
+
+    public function __construct()
+    {
+        $this->sendAction = new SendAction;
+    }
 
     public function __invoke(RegistrationDto $dto): JsonResponse
     {
@@ -17,15 +25,20 @@ class RegistrationAction
             'country_id' => $dto->countryId,
             'name' => $dto->name,
             'email' => $dto->email,
+            'phone' => $dto->phone,
             'password' => $dto->password
         ];
 
-        $user = User::create($data);
+        Cache::put('user_' . $dto->phone, $data, now()->addHour());
 
-        $user->sendEmailVerificationNotification();
+        return ($this->sendAction)($data);
 
-        return static::toResponse(
-            message: "Paydalaniwshi jaratildi, ko'rsetilgen email addressin'izdi tastiyiqlaw ushin pochtan'izg'a xat ketti"
-        );
+        // $user = User::create($data);
+
+        // $user->sendEmailVerificationNotification();
+
+        // return static::toResponse(
+        //     message: "Paydalaniwshi jaratildi, ko'rsetilgen email addressin'izdi tastiyiqlaw ushin pochtan'izg'a xat ketti"
+        // );
     }
 }

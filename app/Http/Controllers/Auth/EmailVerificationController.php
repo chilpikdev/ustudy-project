@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class VerificationController extends Controller
+class EmailVerificationController extends Controller
 {
     use ResponseTrait;
 

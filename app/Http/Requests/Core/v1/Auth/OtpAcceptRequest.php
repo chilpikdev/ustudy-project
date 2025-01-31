@@ -5,7 +5,7 @@ namespace App\Http\Requests\Core\v1\Auth;
 use App\Http\Requests\Traits\FailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class OtpAcceptRequest extends FormRequest
 {
     use FailedValidation;
 
@@ -26,7 +26,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'phone' => 'required|numeric|max_digits:12|min_digits:12',
-            'password' => 'required|string|min:8'
+            'code' => 'required|numeric|max_digits:6|min_digits:6'
         ];
     }
 }

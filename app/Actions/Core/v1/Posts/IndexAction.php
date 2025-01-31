@@ -4,7 +4,6 @@ namespace App\Actions\Core\v1\Posts;
 
 use App\Actions\Traits\GenerateKeyCacheTrait;
 use App\Dto\Core\v1\Posts\IndexDto;
-use App\Exceptions\ApiResponseException;
 use App\Http\Resources\Core\v1\Posts\PostCollection;
 use App\Models\Post;
 use App\Traits\ResponseTrait;

@@ -10,6 +10,7 @@ class RegistrationDto
         public int $countryId,
         public string $name,
         public string $email,
+        public int $phone,
         public string $password,
     ) {}
 
@@ -19,6 +20,7 @@ class RegistrationDto
             countryId: $request->get('country_id'),
             name: $request->get('name'),
             email: $request->get('email'),
+            phone: $request->get('phone'),
             password: $request->get('password')
         );
     }

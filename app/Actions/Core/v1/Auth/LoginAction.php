@@ -18,7 +18,7 @@ class LoginAction
     public function __invoke(LoginDto $dto): JsonResponse
     {
         try {
-            $user = User::where('email', $dto->email)->firstOrFail();
+            $user = User::where('phone', $dto->phone)->firstOrFail();
 
             if (!Hash::check($dto->password, $user->password)) {
                 throw new AuthenticationException();
