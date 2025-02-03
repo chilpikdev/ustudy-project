@@ -2,7 +2,6 @@
 
 namespace App\Actions\Core\v1\Auth\Otp;
 
-use App\Exceptions\ApiResponseException;
 use App\Services\Auth\EskizService;
 use App\Traits\ResponseTrait;
 use Cache;
@@ -23,7 +22,6 @@ class SendAction
     /**
      * Summary of __invoke
      * @param array $user
-     * @throws \App\Exceptions\ApiResponseException
      * @return JsonResponse
      */
     public function __invoke(array $user): JsonResponse
@@ -38,14 +36,18 @@ class SendAction
             $second = $ttl % 60;
             $second = $second < 10 ? '0' . $second : $second;
 
-            throw new ApiResponseException(__('auth.otp.exists', ['sec' => '0' . $minute . ':' . $second]), 400);
+            return static::toResponse(
+                code: 400,
+                message: __('auth.otp.exists', ['sec' => '0' . $minute . ':' . $second]),
+                ttl: $ttl
+            );
         }
 
         // sms jiberiw processi
         $this->eskizService->send(
             phone: $user['phone'],
-            message: __('auth.otp.message', ['code' => $code])
-            // message: "Bu Eskiz dan test"
+            // message: __('auth.otp.message', ['code' => $code])
+            message: "Bu Eskiz dan test"
         );
 
         Cache::set('otp_verification_' . $user['phone'], $code, $ttl);

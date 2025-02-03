@@ -37,7 +37,7 @@ class AcceptAction
 
         $user = User::create($data);
 
-        // $user->assignRole('user');
+        $user->assignRole('user');
 
         $user->update(['phone_verified_at' => now()]);
 

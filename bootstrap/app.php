@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\HasVerifiedEmail;
+use App\Http\Middleware\HasVerifiedPhone;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
@@ -22,7 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'abilities' => CheckAbilities::class,
             'ability' => CheckForAnyAbility::class,
-            'verified' => HasVerifiedEmail::class,
+            'verified_email' => HasVerifiedEmail::class,
+            'verified_phone' => HasVerifiedPhone::class,
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
         $middleware->group('api', [
             \App\Http\Middleware\ApiJson::class,

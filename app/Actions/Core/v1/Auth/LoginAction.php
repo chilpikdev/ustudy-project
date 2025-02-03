@@ -4,9 +4,9 @@ namespace App\Actions\Core\v1\Auth;
 
 use App\Dto\Core\v1\Auth\LoginDto;
 use App\Enums\TokenAbilityEnum;
+use App\Exceptions\ApiResponseException;
 use App\Models\User;
 use App\Traits\ResponseTrait;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +21,7 @@ class LoginAction
             $user = User::where('phone', $dto->phone)->firstOrFail();
 
             if (!Hash::check($dto->password, $user->password)) {
-                throw new AuthenticationException();
+                throw new ApiResponseException("Kiritilgen parol duris emes", 401);
             }
 
             auth()->login($user);
