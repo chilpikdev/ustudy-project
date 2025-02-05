@@ -54,7 +54,7 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->
 /**
  * Routs for Auth & Verified Users
  */
-Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->value, 'verified_phone'])->group(function () {
+Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->value, 'verified_phone', 'role:user|admin'])->group(function () {
     Route::get('test', function () {
         return response()->json("You're verified!");
     });

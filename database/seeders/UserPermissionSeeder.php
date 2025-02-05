@@ -22,6 +22,7 @@ class UserPermissionSeeder extends Seeder
         // create permissions
         Permission::create(['guard_name' => 'web', 'name' => 'dashboard']);
         Permission::create(['guard_name' => 'web', 'name' => 'manage-users']);
+        Permission::create(['guard_name' => 'web', 'name' => 'posts']);
 
         // create roles and assign existing permissions
         $role1 = Role::create([
@@ -64,6 +65,7 @@ class UserPermissionSeeder extends Seeder
 
         // assign admin role
         $user->assignRole($role1);
+        $user->givePermissionTo('posts');
 
         // creating fake users
         User::factory(9)->create()->map(function ($user) use ($role3) {

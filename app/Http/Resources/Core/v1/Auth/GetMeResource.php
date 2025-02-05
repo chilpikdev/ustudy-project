@@ -21,6 +21,8 @@ class GetMeResource extends JsonResource
             'country' => $this->country?->name,
             'email_verified_at' => $this->email_verified_at?->format('Y-m-d H:i:s'),
             'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
+            'roles' => $this->getRoleNames(),
+            'permissions' => $this->getAllPermissions()?->map(fn ($permission) => $permission->name),
         ];
     }
 }
