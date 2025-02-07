@@ -23,7 +23,8 @@ class RegistrationAction
     {
         $data = [
             'country_id' => $dto->countryId,
-            'name' => $dto->name,
+            'first_name' => $dto->firstName,
+            'last_name' => $dto->lastName,
             'email' => $dto->email,
             'phone' => $dto->phone,
             'password' => $dto->password

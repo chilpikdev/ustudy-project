@@ -8,7 +8,8 @@ class RegistrationDto
 {
     public function __construct(
         public int $countryId,
-        public string $name,
+        public string $firstName,
+        public string $lastName,
         public string $email,
         public int $phone,
         public string $password,
@@ -18,7 +19,8 @@ class RegistrationDto
     {
         return new self(
             countryId: $request->get('country_id'),
-            name: $request->get('name'),
+            firstName: $request->get('first_name'),
+            lastName: $request->get('last_name'),
             email: $request->get('email'),
             phone: $request->get('phone'),
             password: $request->get('password')

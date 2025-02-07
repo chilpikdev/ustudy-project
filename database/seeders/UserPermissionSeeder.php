@@ -52,7 +52,8 @@ class UserPermissionSeeder extends Seeder
         // create users
         $user = User::create([
             'country_id' => Country::inRandomOrder()->first()->id,
-            'name' => 'Test User',
+            'first_name' => 'Test',
+            'last_name' => 'User',
             'email' => 'test@example.com',
             'email_verified_at' => now(),
             'phone' => '998981600609',

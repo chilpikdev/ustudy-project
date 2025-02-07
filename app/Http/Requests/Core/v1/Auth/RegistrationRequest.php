@@ -27,7 +27,8 @@ class RegistrationRequest extends FormRequest
     {
         return [
             'country_id' => 'required|integer|exists:countries,id',
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'phone' => 'required|numeric|max_digits:12|min_digits:12|unique:users,phone',
             'email' => 'required|string|email|unique:users,email',
             'password' => [
