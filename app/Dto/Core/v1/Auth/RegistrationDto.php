@@ -4,7 +4,7 @@ namespace App\Dto\Core\v1\Auth;
 
 use App\Http\Requests\Core\v1\Auth\RegistrationRequest;
 
-class RegistrationDto
+readonly class RegistrationDto
 {
     public function __construct(
         public int $countryId,

@@ -4,7 +4,7 @@ namespace App\Dto\Core\v1\Auth;
 
 use App\Http\Requests\Core\v1\Auth\OtpAcceptRequest;
 
-class OtpAcceptDto
+readonly class OtpAcceptDto
 {
     public function __construct(
         public int $phone,

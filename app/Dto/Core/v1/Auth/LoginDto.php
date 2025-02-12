@@ -4,7 +4,7 @@ namespace App\Dto\Core\v1\Auth;
 
 use App\Http\Requests\Core\v1\Auth\LoginRequest;
 
-class LoginDto
+readonly class LoginDto
 {
     public function __construct(
         public int $phone,
