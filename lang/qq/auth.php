@@ -16,7 +16,7 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'user_not_found' => "Paydalaniwshi tabilmadi",
+    'user_not_found' => 'Paydalaniwshi tabilmadi',
 
     'otp' => [
         'success' => "Ko'rsetilgen nomerge kod jiberildi",
@@ -25,5 +25,5 @@ return [
         'code_incorrect' => "Kiritilgen kod qa'te",
         'account_verifed' => "Telefon nomer a'wmetli tastiyiqlandi!",
         'message' => "Project.uz dan tastiyiqlaw kodin'iz: :code",
-    ]
+    ],
 ];

@@ -30,7 +30,7 @@ class IndexRequest extends FormRequest
             'search' => 'nullable|string|min:4',
             'from' => 'nullable|date|date_format:Y-m-d|required_with:to',
             'to' => 'nullable|date|date_format:Y-m-d|required_with:from',
-            'sort' => 'nullable|string|in:popular,recommended'
+            'sort' => 'nullable|string|in:popular,recommended',
         ];
     }
 }

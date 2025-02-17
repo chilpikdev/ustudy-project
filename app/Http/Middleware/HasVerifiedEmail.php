@@ -16,7 +16,7 @@ class HasVerifiedEmail
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->user()->hasVerifiedEmail()) {
+        if (! auth()->user()->hasVerifiedEmail()) {
             throw new ApiResponseException("Email tastiyiqlanbag'an", 403);
         }
 

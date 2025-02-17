@@ -14,7 +14,7 @@ class RefreshTokenAction
     {
         $accessTokenExpiration = now()->addMinutes(config('sanctum.at_expiration'));
 
-        $accessToken =  auth()->user()->createToken(
+        $accessToken = auth()->user()->createToken(
             name: 'access token',
             abilities: [TokenAbilityEnum::ACCESS_TOKEN->value],
             expiresAt: $accessTokenExpiration

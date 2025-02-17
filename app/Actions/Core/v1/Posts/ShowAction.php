@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Cache;
 
 class ShowAction
 {
-    use ResponseTrait, GenerateKeyCacheTrait;
+    use GenerateKeyCacheTrait, ResponseTrait;
 
     public function __invoke(int $id): JsonResponse
     {
         try {
-            $data = Cache::remember('posts:show' . $this->generateKey(), now()->addDay(), function () use ($id) {
+            $data = Cache::remember('posts:show'.$this->generateKey(), now()->addDay(), function () use ($id) {
                 return Post::findOrFail($id);
             });
 
@@ -26,7 +26,7 @@ class ShowAction
                 data: new ShowResource($data),
             );
         } catch (ModelNotFoundException $ex) {
-            throw new ApiResponseException("post not found", 404);
+            throw new ApiResponseException('post not found', 404);
         }
     }
 }

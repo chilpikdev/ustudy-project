@@ -16,29 +16,27 @@ class SendAction
 
     public function __construct()
     {
-        $this->eskizService = new EskizService();
+        $this->eskizService = new EskizService;
     }
 
     /**
      * Summary of __invoke
-     * @param array $user
-     * @return JsonResponse
      */
     public function __invoke(array $user): JsonResponse
     {
         $ttl = 120;
         $code = rand(100000, 999999);
 
-        if (Cache::has('otp_verification_' . $user['phone'])) {
-            $ttl = Redis::ttl(config('cache.prefix') . 'otp_verification_' . $user['phone']);
+        if (Cache::has('otp_verification_'.$user['phone'])) {
+            $ttl = Redis::ttl(config('cache.prefix').'otp_verification_'.$user['phone']);
 
             $minute = (int) ($ttl / 60);
             $second = $ttl % 60;
-            $second = $second < 10 ? '0' . $second : $second;
+            $second = $second < 10 ? '0'.$second : $second;
 
             return static::toResponse(
                 code: 400,
-                message: __('auth.otp.exists', ['sec' => '0' . $minute . ':' . $second]),
+                message: __('auth.otp.exists', ['sec' => '0'.$minute.':'.$second]),
                 ttl: $ttl
             );
         }
@@ -47,15 +45,15 @@ class SendAction
         $this->eskizService->send(
             phone: $user['phone'],
             // message: __('auth.otp.message', ['code' => $code])
-            message: "Bu Eskiz dan test"
+            message: 'Bu Eskiz dan test'
         );
 
-        Cache::set('otp_verification_' . $user['phone'], $code, $ttl);
+        Cache::set('otp_verification_'.$user['phone'], $code, $ttl);
 
         return static::toResponse(
             message: __('auth.otp.success'),
             data: [
-                'code' => $code
+                'code' => $code,
             ],
             ttl: $ttl
         );

@@ -20,16 +20,16 @@ class EmailVerificationController extends Controller
     public function verify(Request $request): JsonResponse
     {
         try {
-            if (!$request->hasValidSignature()) {
+            if (! $request->hasValidSignature()) {
                 return static::toResponse(
                     code: 410,
-                    message: "Verification link is expired",
+                    message: 'Verification link is expired',
                 );
             }
 
             $user = User::findOrFail($request->id);
 
-            if (!$user->hasVerifiedEmail()) {
+            if (! $user->hasVerifiedEmail()) {
                 $user->markEmailAsVerified();
             }
 
@@ -50,14 +50,14 @@ class EmailVerificationController extends Controller
 
         if ($user->hasVerifiedEmail()) {
             return static::toResponse(
-                message: "User already is verified"
+                message: 'User already is verified'
             );
         }
 
         $user->sendEmailVerificationNotification();
 
         return static::toResponse(
-            message: "Verfication link resended"
+            message: 'Verfication link resended'
         );
     }
 }

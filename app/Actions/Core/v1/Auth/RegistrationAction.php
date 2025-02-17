@@ -27,10 +27,10 @@ class RegistrationAction
             'last_name' => $dto->lastName,
             'email' => $dto->email,
             'phone' => $dto->phone,
-            'password' => $dto->password
+            'password' => $dto->password,
         ];
 
-        Cache::put('user_' . $dto->phone, $data, now()->addHour());
+        Cache::put('user_'.$dto->phone, $data, now()->addHour());
 
         return ($this->sendAction)($data);
 

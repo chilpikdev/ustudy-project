@@ -10,7 +10,7 @@ class Comment extends Model
     protected $table = 'comments';
 
     protected $fillable = [
-        'content'
+        'content',
     ];
 
     protected function casts(): array
@@ -23,7 +23,6 @@ class Comment extends Model
 
     /**
      * Summary of commentable
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function commentable(): MorphTo
     {

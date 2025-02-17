@@ -23,7 +23,6 @@ class Tag extends Model
 
     /**
      * Summary of posts
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function posts(): BelongsToMany
     {

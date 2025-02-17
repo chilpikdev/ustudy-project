@@ -14,13 +14,12 @@ class ApiValidationException extends Exception
 
     /**
      * Summary of render
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function render(): JsonResponse
     {
         return response()->json([
             'status' => 422,
-            'errors' => $this->validator->errors()
+            'errors' => $this->validator->errors(),
         ], 422);
     }
 }

@@ -9,7 +9,6 @@ trait HasComment
 {
     /**
      * Summary of comments
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function comments(): MorphMany
     {

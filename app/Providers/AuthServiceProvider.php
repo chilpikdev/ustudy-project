@@ -23,12 +23,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         VerifyEmail::toMailUsing(callback: function ($notifiable, $url) {
             return (new MailMessage)
-                ->subject("subject")
-                ->line("verify")
-                ->greeting("Hello !")
-                ->action("verification subject", $url)
-                ->line("info")
-                ->salutation("text");
+                ->subject('subject')
+                ->line('verify')
+                ->greeting('Hello !')
+                ->action('verification subject', $url)
+                ->line('info')
+                ->salutation('text');
         });
     }
 }

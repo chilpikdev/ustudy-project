@@ -12,12 +12,11 @@ class UserPoint extends Model
     protected $fillable = [
         'user_id',
         'points',
-        'all_points'
+        'all_points',
     ];
 
     /**
      * Summary of user
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {

@@ -58,7 +58,7 @@ class UserPermissionSeeder extends Seeder
             'email_verified_at' => now(),
             'phone' => '998981600609',
             'phone_verified_at' => now(),
-            'password' => 12345678
+            'password' => 12345678,
         ]);
 
         // create point items

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Casts\PasswordAttributeCast;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens, HasRoles;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,7 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'password',
         'email_verified_at',
-        'phone_verified_at'
+        'phone_verified_at',
     ];
 
     /**
@@ -46,10 +46,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Summary of appends
+     *
      * @var array
      */
     protected $appends = [
-        'full_name'
+        'full_name',
     ];
 
     /**
@@ -68,7 +69,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Summary of getFullNameAttribute
-     * @return string
      */
     public function getFullNameAttribute(): string
     {
@@ -77,7 +77,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Summary of country
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function country(): BelongsTo
     {
@@ -86,7 +85,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Summary of posts
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function posts(): HasMany
     {
@@ -95,7 +93,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Summary of point
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function point(): HasOne
     {
@@ -104,7 +101,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Has Verified Phone
-     * @return bool
      */
     public function hasVerifiedPhone(): bool
     {

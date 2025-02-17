@@ -41,7 +41,7 @@ class RegistrationRequest extends FormRequest
                     ->letters()
                     ->numbers()
                     ->symbols(),
-            ]
+            ],
         ];
     }
 }

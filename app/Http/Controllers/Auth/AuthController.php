@@ -17,9 +17,6 @@ class AuthController extends Controller
 {
     /**
      * Summary of login
-     * @param \App\Http\Requests\Core\v1\Auth\LoginRequest $request
-     * @param \App\Actions\Core\v1\Auth\LoginAction $action
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function login(LoginRequest $request, LoginAction $action): JsonResponse
     {
@@ -28,9 +25,6 @@ class AuthController extends Controller
 
     /**
      * Summary of registration
-     * @param \App\Http\Requests\Core\v1\Auth\RegistrationRequest $request
-     * @param \App\Actions\Core\v1\Auth\RegistrationAction $action
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function registration(RegistrationRequest $request, RegistrationAction $action): JsonResponse
     {
@@ -39,8 +33,6 @@ class AuthController extends Controller
 
     /**
      * Summary of refreshToken
-     * @param \App\Actions\Core\v1\Auth\RefreshTokenAction $action
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function refreshToken(RefreshTokenAction $action): JsonResponse
     {
@@ -49,8 +41,6 @@ class AuthController extends Controller
 
     /**
      * Summary of me
-     * @param \App\Actions\Core\v1\Auth\GetMeAction $action
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function me(GetMeAction $action): JsonResponse
     {
@@ -59,14 +49,13 @@ class AuthController extends Controller
 
     /**
      * Summary of logout
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function logout(): JsonResponse
     {
         auth()->user()->tokens()->delete();
 
         return response()->json([
-            'message' => "You're logout"
+            'message' => "You're logout",
         ]);
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, HasComment;
+    use HasComment, HasFactory, SoftDeletes;
 
     protected $table = 'posts';
 
@@ -37,7 +37,6 @@ class Post extends Model
 
     /**
      * Summary of user
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -46,7 +45,6 @@ class Post extends Model
 
     /**
      * Summary of tags
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function tags(): BelongsToMany
     {

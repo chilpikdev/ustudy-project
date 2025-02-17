@@ -22,7 +22,7 @@ class CountrySeeder extends Seeder
                 'name' => 'Kazakhstan',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
         ]);
     }
 }
