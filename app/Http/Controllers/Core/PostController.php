@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Core;
 
 use App\Actions\Core\v1\Posts\IndexAction;
 use App\Actions\Core\v1\Posts\ShowAction;
 use App\Dto\Core\v1\Posts\IndexDto;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Core\v1\Posts\IndexRequest;
 use Illuminate\Http\JsonResponse;
 

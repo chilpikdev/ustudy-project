@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Core\Auth;
 
 use App\Actions\Core\v1\Auth\GetMeAction;
 use App\Actions\Core\v1\Auth\LoginAction;
@@ -17,6 +17,9 @@ class AuthController extends Controller
 {
     /**
      * Summary of login
+     * @param \App\Http\Requests\Core\v1\Auth\LoginRequest $request
+     * @param \App\Actions\Core\v1\Auth\LoginAction $action
+     * @return \Illuminate\Http\JsonResponse
      */
     public function login(LoginRequest $request, LoginAction $action): JsonResponse
     {
@@ -25,6 +28,9 @@ class AuthController extends Controller
 
     /**
      * Summary of registration
+     * @param \App\Http\Requests\Core\v1\Auth\RegistrationRequest $request
+     * @param \App\Actions\Core\v1\Auth\RegistrationAction $action
+     * @return \Illuminate\Http\JsonResponse
      */
     public function registration(RegistrationRequest $request, RegistrationAction $action): JsonResponse
     {
@@ -33,6 +39,8 @@ class AuthController extends Controller
 
     /**
      * Summary of refreshToken
+     * @param \App\Actions\Core\v1\Auth\RefreshTokenAction $action
+     * @return \Illuminate\Http\JsonResponse
      */
     public function refreshToken(RefreshTokenAction $action): JsonResponse
     {
@@ -41,6 +49,8 @@ class AuthController extends Controller
 
     /**
      * Summary of me
+     * @param \App\Actions\Core\v1\Auth\GetMeAction $action
+     * @return \Illuminate\Http\JsonResponse
      */
     public function me(GetMeAction $action): JsonResponse
     {
@@ -49,6 +59,7 @@ class AuthController extends Controller
 
     /**
      * Summary of logout
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function logout(): JsonResponse
     {

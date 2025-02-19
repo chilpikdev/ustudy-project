@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\Core\v1\Auth;
+namespace App\Actions\Admin\v1\Auth;
 
-use App\Dto\Core\v1\Auth\LoginDto;
+use App\Dto\Admin\v1\Auth\LoginDto;
 use App\Enums\TokenAbilityEnum;
 use App\Exceptions\ApiResponseException;
 use App\Models\User;

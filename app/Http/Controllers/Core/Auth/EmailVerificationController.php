@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Core\Auth;
 
 use App\Exceptions\ApiResponseException;
 use App\Http\Controllers\Controller;

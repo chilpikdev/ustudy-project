@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Core\Auth;
 
 use App\Actions\Core\v1\Auth\Otp\AcceptAction;
 use App\Dto\Core\v1\Auth\OtpAcceptDto;
