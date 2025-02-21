@@ -13,7 +13,9 @@ class CreateAction
 
     public function __invoke(CreateDto $dto): JsonResponse
     {
+        $userId = auth()->id();
         $data = [
+            'user_id' => $userId,
             'title' => $dto->title,
             'description' => $dto->description,
             'content' => $dto->content,

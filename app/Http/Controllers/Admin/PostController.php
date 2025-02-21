@@ -53,13 +53,14 @@ class PostController extends Controller
 
     /**
      * Summary of update
+     * @param int $id
      * @param \App\Http\Requests\Admin\v1\Posts\UpdateRequest $request
      * @param \App\Actions\Admin\v1\Posts\UpdateAction $action
      * @return JsonResponse
      */
-    public function update(UpdateRequest $request, UpdateAction $action): JsonResponse
+    public function update(int $id, UpdateRequest $request, UpdateAction $action): JsonResponse
     {
-        return $action(UpdateDto::from($request));
+        return $action(UpdateDto::from($id, $request));
     }
 
     /**

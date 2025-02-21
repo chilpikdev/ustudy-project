@@ -15,10 +15,10 @@ readonly class UpdateDto
     ) {
     }
 
-    public static function from(UpdateRequest $request): self
+    public static function from(int $id, UpdateRequest $request): self
     {
         return new self(
-            id: $request->get('id'),
+            id: $id,
             title: $request->get('title'),
             description: $request->get('description'),
             content: $request->get('content'),

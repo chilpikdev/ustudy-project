@@ -3,7 +3,6 @@
 use App\Enums\TokenAbilityEnum;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\AdminTestApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '\d+');
@@ -47,10 +46,10 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->
     Route::middleware(['verified_phone', 'role:admin|moderator'])->group(function () {
         Route::prefix('posts')->group(function () {
             Route::get('/', [PostController::class, 'index']);
-            Route::create('create', [PostController::class, 'create']);
+            Route::post('create', [PostController::class, 'create']);
             Route::get('show/{id}', [PostController::class, 'show']);
-            Route::put('update', [PostController::class, 'show']);
-            Route::delete('delete/{id}', [PostController::class, 'show']);
+            Route::put('update/{id}', [PostController::class, 'update']);
+            Route::delete('delete/{id}', [PostController::class, 'delete']);
         });
     });
 });
