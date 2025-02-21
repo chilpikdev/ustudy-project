@@ -18,7 +18,7 @@ class ShowAction
     public function __invoke(int $id): JsonResponse
     {
         try {
-            $data = Cache::remember('posts:show'.$this->generateKey(), now()->addDay(), function () use ($id) {
+            $data = Cache::remember('posts:show' . $this->generateKey(), now()->addDay(), function () use ($id) {
                 return Post::findOrFail($id);
             });
 

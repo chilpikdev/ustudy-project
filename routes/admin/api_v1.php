@@ -46,8 +46,11 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->
      */
     Route::middleware(['verified_phone', 'role:admin|moderator'])->group(function () {
         Route::prefix('posts')->group(function () {
-            Route::get('/', [PostController::class, 'posts']);
+            Route::get('/', [PostController::class, 'index']);
+            Route::create('create', [PostController::class, 'create']);
             Route::get('show/{id}', [PostController::class, 'show']);
+            Route::put('update', [PostController::class, 'show']);
+            Route::delete('delete/{id}', [PostController::class, 'show']);
         });
     });
 });

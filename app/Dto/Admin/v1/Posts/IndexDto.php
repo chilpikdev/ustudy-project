@@ -13,7 +13,8 @@ readonly class IndexDto
         public ?string $from,
         public ?string $to,
         public ?string $sort,
-    ) {}
+    ) {
+    }
 
     public static function from(IndexRequest $request): self
     {
