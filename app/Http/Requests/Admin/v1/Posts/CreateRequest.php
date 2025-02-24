@@ -29,6 +29,8 @@ class CreateRequest extends FormRequest
             'description' => 'required|string|min:1|max:255',
             'content' => 'required|string|min:1',
             'recommended' => 'nullable|boolean',
+            'files' => 'required|array|max:5',
+            'files.*' => 'required|file|mimes:png,jpg|max:4096',
         ];
     }
 }

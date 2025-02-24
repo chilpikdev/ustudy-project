@@ -29,19 +29,16 @@ class IndexAction
                 $items->whereBetween('created_at', [$dto->from, $dto->to]);
             }
 
-            switch ($dto->sort) {
-                case 'popular':
-                    $items
-                        ->orderByDesc('view')
-                        ->orderByDesc('shared');
-                    break;
+            switch ($dto->orderBy) {
+                case 'id':
+                case 'title':
+                case 'description':
                 case 'recommended':
-                    $items
-                        ->where('recommended', '=', true);
+                case 'created_at':
+                    $items->orderBy($dto->orderBy, $dto->sort);
                     break;
                 default:
-                    $items
-                        ->orderByDesc('created_at');
+                    $items->orderByDesc('created_at');
             }
 
             return $items->paginate(perPage: $dto->perPage, page: $dto->page);

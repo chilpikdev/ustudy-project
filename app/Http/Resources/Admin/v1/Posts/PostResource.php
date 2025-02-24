@@ -18,8 +18,6 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'view' => $this->view,
-            'shared' => $this->shared,
             'recommended' => $this->recommended,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];

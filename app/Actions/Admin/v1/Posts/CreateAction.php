@@ -3,6 +3,7 @@
 namespace App\Actions\Admin\v1\Posts;
 
 use App\Dto\Admin\v1\Posts\CreateDto;
+use App\Helpers\FileUploadHelper;
 use App\Models\Post;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
@@ -14,6 +15,7 @@ class CreateAction
     public function __invoke(CreateDto $dto): JsonResponse
     {
         $data = [
+            'user_id' => auth()->id(),
             'title' => $dto->title,
             'description' => $dto->description,
             'content' => $dto->content,
@@ -23,7 +25,12 @@ class CreateAction
             $data['recommended'] = $dto->recommended;
         }
 
-        Post::create($data);
+        $item = Post::create($data);
+        $uploadedFiles = array_filter(FileUploadHelper::files($dto->files, "posts/{$item->id}"));
+
+        array_map(function ($file) use ($item) {
+            $item->files()->create($file);
+        }, $uploadedFiles);
 
         return static::toResponse(
             message: "Post created"

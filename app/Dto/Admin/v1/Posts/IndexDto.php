@@ -12,6 +12,7 @@ readonly class IndexDto
         public ?string $search,
         public ?string $from,
         public ?string $to,
+        public ?string $orderBy,
         public ?string $sort,
     ) {
     }
@@ -24,6 +25,7 @@ readonly class IndexDto
             search: $request->get('search'),
             from: $request->get('from'),
             to: $request->get('to'),
+            orderBy: $request->get('order_by'),
             sort: $request->get('sort'),
         );
     }
