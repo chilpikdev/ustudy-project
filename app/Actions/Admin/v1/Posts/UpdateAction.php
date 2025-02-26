@@ -4,6 +4,7 @@ namespace App\Actions\Admin\v1\Posts;
 
 use App\Dto\Admin\v1\Posts\UpdateDto;
 use App\Exceptions\ApiResponseException;
+use App\Helpers\FileUploadHelper;
 use App\Models\Post;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -26,6 +27,14 @@ class UpdateAction
             ];
 
             $item->update($data);
+
+            if ($dto->files) {
+                $uploadedFiles = FileUploadHelper::files($dto->files, "posts/{$item->id}");
+
+                array_map(function ($file) use ($item) {
+                    $item->files()->create($file);
+                }, $uploadedFiles);
+            }
 
             return static::toResponse(
                 message: "Post updated"

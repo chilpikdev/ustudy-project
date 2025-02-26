@@ -26,7 +26,7 @@ class CreateAction
         }
 
         $item = Post::create($data);
-        $uploadedFiles = array_filter(FileUploadHelper::files($dto->files, "posts/{$item->id}"));
+        $uploadedFiles = FileUploadHelper::files($dto->files, "posts/{$item->id}");
 
         array_map(function ($file) use ($item) {
             $item->files()->create($file);

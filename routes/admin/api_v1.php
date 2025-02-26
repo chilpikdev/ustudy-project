@@ -2,6 +2,7 @@
 
 use App\Enums\TokenAbilityEnum;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,12 +50,14 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->
             Route::post('create', [PostController::class, 'create']);
             Route::get('show/{id}', [PostController::class, 'show']);
             Route::put('update', [PostController::class, 'show']);
-            Route::delete('delete/{id}', [PostController::class, 'show']);
+            Route::delete('delete/{id}', [PostController::class, 'delete']);
+        });
+
+        Route::prefix('file')->group(function () {
+            Route::get('{id}', [FileController::class, 'download']);
+            Route::delete('delete/{id}', [FileController::class, 'delete']);
         });
     });
 });
 
-// TODO: file birme-bir o'shiriw
-// TODO: crud lardin' basqalarinda logikasin jaziw
-// TODO: file di response penen qaytariw
 // TODO: Collections & Resurses

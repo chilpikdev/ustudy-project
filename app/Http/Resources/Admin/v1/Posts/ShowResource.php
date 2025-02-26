@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin\v1\Posts;
 
+use App\Http\Resources\FileResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -22,7 +23,7 @@ class ShowResource extends JsonResource
             'view' => $this->view,
             'shared' => $this->shared,
             'recommended' => $this->recommended,
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'files' => FileResource::collection($this->files)
         ];
     }
 }

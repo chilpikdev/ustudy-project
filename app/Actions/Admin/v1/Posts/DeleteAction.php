@@ -3,6 +3,7 @@
 namespace App\Actions\Admin\v1\Posts;
 
 use App\Exceptions\ApiResponseException;
+use App\Helpers\FileDeleteHelper;
 use App\Models\Post;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -16,6 +17,8 @@ class DeleteAction
     {
         try {
             $item = Post::findOrFail($id);
+            FileDeleteHelper::files($item->files->pluck('path')->toArray(), "posts/{$item->id}");
+            $item->files()->delete();
             $item->delete();
 
             return static::toResponse(

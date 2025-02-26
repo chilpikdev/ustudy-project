@@ -12,6 +12,7 @@ readonly class UpdateDto
         public string $description,
         public string $content,
         public bool $recommended,
+        public ?array $files,
     ) {
     }
 
@@ -23,6 +24,7 @@ readonly class UpdateDto
             description: $request->get('description'),
             content: $request->get('content'),
             recommended: $request->get('recommended'),
+            files: $request->file('files'),
         );
     }
 }

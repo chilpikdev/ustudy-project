@@ -28,7 +28,7 @@ class FileUploadHelper
             $uploadedFiles[] = self::file($file, $path);
         }
 
-        return $uploadedFiles;
+        return array_filter($uploadedFiles);
     }
 
     /**
