@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Actions\Admin\v1\Posts;
+namespace App\Actions\Admin\v1\File;
 
 use App\Exceptions\ApiResponseException;
 use App\Helpers\FileDeleteHelper;
-use App\Models\Post;
+use App\Models\File;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+
 
 class DeleteAction
 {
@@ -16,16 +17,16 @@ class DeleteAction
     public function __invoke(int $id): JsonResponse
     {
         try {
-            $item = Post::findOrFail($id);
-            FileDeleteHelper::files($item->files->pluck('path')->toArray(), "posts/{$item->id}");
-            $item->files()->delete();
-            $item->delete();
+            $file = File::findorFail($id);
+            FileDeleteHelper::file($file->path);
+            $file->delete();
 
             return static::toResponse(
-                message: "Post deleted"
+                message: 'File deleted'
             );
         } catch (ModelNotFoundException $e) {
-            throw new ApiResponseException("Post not found", 404);
+            throw new ApiResponseException('File not found', 404);
         }
     }
+    
 }

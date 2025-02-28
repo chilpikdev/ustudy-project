@@ -29,6 +29,8 @@ class UpdateRequest extends FormRequest
             'description' => 'required|string|max:255',
             'content' => 'required|string',
             'recommended' => 'required|boolean',
+            'files' => 'nullable|array|max:5',
+            'files.*' => 'required|file|mimes:png,jpg|max:4096',
         ];
     }
 }
