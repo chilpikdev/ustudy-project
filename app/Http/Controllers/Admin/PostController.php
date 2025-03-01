@@ -14,7 +14,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\v1\Posts\CreateRequest;
 use App\Http\Requests\Admin\v1\Posts\IndexRequest;
 use App\Http\Requests\Admin\v1\Posts\UpdateRequest;
+use Illuminate\Container\Attributes\Storage;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -71,5 +73,31 @@ class PostController extends Controller
     public function delete(int $id, DeleteAction $action): JsonResponse
     {
         return $action($id);
+    }
+
+    public function upload(Request $request)
+    {
+        $contentType = $request->header('Content-Type');
+        $binaryFile = file_get_contents('php://input');
+
+        $extensions = [
+            'image/jpg' => 'jpg',
+            'image/png' => 'png',
+            'image/gif' => 'gif',
+            'application/pdf' => 'pdf',
+            'text/plain' => 'txt'
+        ];
+
+        /*
+        if (!isset($extensions[$contentType])) {
+            return response()->json(['error' => 'Unsupported file type'], 400);
+        }
+        */
+
+        $fileName = uniqid('upload_', true) . '.' . $extensions[$contentType];
+
+        \Storage::disk('public')->put("uploads/{$fileName}", $binaryFile);
+
+        dd($fileName);
     }
 }

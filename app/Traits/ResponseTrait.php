@@ -26,6 +26,17 @@ trait ResponseTrait
             $responseData['ttl'] = $ttl;
         }
 
+        if (is_object($data) && property_exists($data, 'resource')) {
+            if ($data->resource instanceof \Illuminate\Pagination\Paginator || $data->resource instanceof \Illuminate\Pagination\LengthAwarePaginator) {
+                $responseData['meta'] = [
+                    'current_page' => $data->currentPage(),
+                    'last_page' => $data->lastPage(),
+                    'per_page' => $data->perPage(),
+                    'total' => $data->total(),
+                ];
+            }
+        }
+
         return response()->json($responseData, $code);
     }
 }
