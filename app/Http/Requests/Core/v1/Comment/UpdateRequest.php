@@ -14,7 +14,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'required|string|max:400',
+            'content' => 'required|string|min:3|max:256',
             'comment_id' => 'required|numeric|exists:comments,id'
         ];
     }

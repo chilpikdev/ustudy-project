@@ -24,10 +24,6 @@ class DeleteAction
         try {
             $comment = Comment::findOrFail($id);
 
-            if ($comment->user_id !== auth()->id()) {
-                throw new ApiResponseException(message: 'Unauthorized', code: 403);
-            }
-
             $comment->delete();
 
             return static::toResponse(
