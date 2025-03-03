@@ -9,7 +9,7 @@ class CreateRequest extends FormRequest
 {
     use FailedValidation;
 
-    /**
+    /*
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
@@ -17,7 +17,7 @@ class CreateRequest extends FormRequest
         return true;
     }
 
-    /**
+    /*
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -31,6 +31,8 @@ class CreateRequest extends FormRequest
             'recommended' => 'nullable|boolean',
             'files' => 'required|array|max:5',
             'files.*' => 'required|file|mimes:png,jpg|max:4096',
+            'tags' => 'nullable|array',
+            'tags.*' => 'required|numeric|exists:tags,id'
         ];
     }
 }

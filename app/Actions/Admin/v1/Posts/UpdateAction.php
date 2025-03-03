@@ -28,6 +28,7 @@ class UpdateAction
 
             $item->update($data);
 
+            $item->tags()->sync($dto->tags);
             if ($dto->files) {
                 $uploadedFiles = FileUploadHelper::files($dto->files, "posts/{$item->id}");
 
