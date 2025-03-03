@@ -15,7 +15,6 @@ use App\Http\Requests\Admin\v1\Posts\CreateRequest;
 use App\Http\Requests\Admin\v1\Posts\IndexRequest;
 use App\Http\Requests\Admin\v1\Posts\UpdateRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -72,25 +71,5 @@ class PostController extends Controller
     public function delete(int $id, DeleteAction $action): JsonResponse
     {
         return $action($id);
-    }
-
-    public function upload(Request $request)
-    {
-        $contentType = $request->header('Content-Type');
-        $binaryFile = file_get_contents('php://input');
-
-        $extensions = [
-            'image/jpeg' => 'jpg',
-            'image/png' => 'png',
-            'image/gif' => 'gif',
-            'application/pdf' => 'pdf',
-            'text/plain' => 'txt'
-        ];
-
-        $fileName = uniqid('upload_', true) . '.' . $extensions[$contentType];
-
-        \Storage::disk('public')->put("uploads/{$fileName}", $binaryFile);
-
-        dd($fileName);
     }
 }

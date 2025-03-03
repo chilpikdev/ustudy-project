@@ -52,14 +52,11 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->
             Route::get('show/{id}', [PostController::class, 'show']);
             Route::put('update', [PostController::class, 'show']);
             Route::delete('delete/{id}', [PostController::class, 'delete']);
-            Route::patch('upload', [PostController::class, 'upload']);
         });
 
         Route::prefix('file')->group(function () {
             Route::get('{id}', [FileController::class, 'download']);
             Route::delete('delete/{id}', [FileController::class, 'delete']);
         });
-
-        Route::get('test', TestController::class);
     });
 });
