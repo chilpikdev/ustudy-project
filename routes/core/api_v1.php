@@ -4,6 +4,7 @@ use App\Enums\TokenAbilityEnum;
 use App\Http\Controllers\Core\Auth\AuthController;
 use App\Http\Controllers\Core\Auth\EmailVerificationController;
 use App\Http\Controllers\Core\Auth\OtpVerificationController;
+use App\Http\Controllers\Core\CommentController;
 use App\Http\Controllers\Core\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,7 +55,11 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->
      * Routs for Auth & Verified Users
      */
     Route::middleware(['verified_phone'])->group(function () {
-        
+        Route::prefix('comment')->group(function () {
+            Route::post('create', [CommentController::class, 'create']);
+            Route::put('update', [CommentController::class, 'update']);
+            Route::delete('delete/{id}', [CommentController::class, 'delete']);
+        });
     });
 });
 
