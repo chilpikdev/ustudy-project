@@ -50,7 +50,7 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->
             Route::get('/', [PostController::class, 'index']);
             Route::post('create', [PostController::class, 'create']);
             Route::get('show/{id}', [PostController::class, 'show']);
-            Route::put('update', [PostController::class, 'show']);
+            Route::put('update', [PostController::class, 'update']);
             Route::delete('delete/{id}', [PostController::class, 'delete']);
         });
 

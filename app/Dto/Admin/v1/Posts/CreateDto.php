@@ -12,6 +12,7 @@ readonly class CreateDto
         public string $content,
         public ?bool $recommended,
         public array $files,
+        public ?array $tags,
     ) {
     }
 
@@ -23,6 +24,7 @@ readonly class CreateDto
             content: $request->get('content'),
             recommended: $request->get('recommended'),
             files: $request->file('files'),
+            tags: $request->get('tags'),
         );
     }
 }

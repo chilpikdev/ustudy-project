@@ -32,6 +32,10 @@ class CreateAction
             $item->files()->create($file);
         }, $uploadedFiles);
 
+        $item->tags()->attach(
+            $dto->tags
+        );
+
         return static::toResponse(
             message: "Post created"
         );
