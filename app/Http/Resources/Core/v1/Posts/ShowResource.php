@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Core\v1\Posts;
 
+
+use App\Http\Resources\Core\v1\Tags\TagCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,6 +23,7 @@ class ShowResource extends JsonResource
             'content' => $this->content,
             'view' => $this->view,
             'shared' => $this->shared,
+            'tags' => new TagCollection($this->tags),
             'recommended' => $this->recommended,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
