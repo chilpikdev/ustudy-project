@@ -10,6 +10,7 @@ use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 class ShowAction
 {
@@ -18,8 +19,18 @@ class ShowAction
     public function __invoke(int $id): JsonResponse
     {
         try {
-            $data = Cache::remember('posts:show'.$this->generateKey(), now()->addDay(), function () use ($id) {
-                return Post::findOrFail($id);
+            $identifier = auth('sanctum')->check() ? "user_" . auth('sanctum')->id() : "ip_" . request()->ip(); //if user is exist, get user_id. If not exist, get ip 
+
+            $cacheKey = "posts:show:{$id}:{$identifier}";
+
+            $data = Cache::remember($cacheKey . ':' . app()->getLocale(), now()->addDay(), function () use ($id, $cacheKey) {
+                $data = Post::findOrFail($id);
+
+                if (!Redis::keys("*$cacheKey*")) {
+                    $data->increment('view');
+                }
+
+                return $data;
             });
 
             return static::toResponse(
