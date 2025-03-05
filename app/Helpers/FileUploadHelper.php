@@ -34,16 +34,16 @@ class FileUploadHelper
     /**
      * Summary of file
      * @param \Illuminate\Http\UploadedFile $file
-     * @param mixed $path
+     * @param string $path
      * @return array|array{extension: string, name: string, path: bool|string, size: bool|int}
      */
-    public static function file(UploadedFile $file, $path): array
+    public static function file(UploadedFile $file, string $path): array
     {
         $fileName = Str::random() . '-' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
-        $path = Storage::disk('public')->putFileAs($path, $file, $fileName);
+        $savedPath = Storage::disk('public')->putFileAs($path, $file, $fileName);
 
-        return $path ? [
-            'path' => $path,
+        return $savedPath ? [
+            'path' => $savedPath,
             'name' => $file->getClientOriginalName(),
             'size' => $file->getSize(),
             'extension' => $file->extension(),

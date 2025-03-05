@@ -4,7 +4,6 @@ use App\Enums\TokenAbilityEnum;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '\d+');
