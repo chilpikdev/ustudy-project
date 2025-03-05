@@ -8,7 +8,6 @@ use App\Dto\Core\v1\Posts\IndexDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Core\v1\Posts\IndexRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -23,8 +22,8 @@ class PostController extends Controller
     /**
      * Summary of show
      */
-    public function show(int $id, ShowAction $action, Request $request): JsonResponse
+    public function show(int $id, ShowAction $action): JsonResponse
     {
-        return $action($id, $request);
+        return $action($id);
     }
 }
