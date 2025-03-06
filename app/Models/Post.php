@@ -28,6 +28,11 @@ class Post extends Model
         'updated_at',
     ];
 
+    public function scopeRecommended($query)
+    {
+        return $query->where('recommended', true);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

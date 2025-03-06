@@ -61,5 +61,8 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->
             Route::delete('delete/{id}', [CommentController::class, 'delete']);
         });
     });
+
+    Route::get('/posts/recommended', [PostController::class, 'showRecommendedPosts']);
+
 });
 
