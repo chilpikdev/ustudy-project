@@ -24,6 +24,7 @@ class UpdateAction
                 'description' => $dto->description,
                 'content' => $dto->content,
                 'recommended' => $dto->recommended,
+                'category_id' => $dto->categoryId,
             ];
 
             $item->update($data);

@@ -16,6 +16,7 @@ class CreateAction
     {
         $data = [
             'user_id' => auth()->id(),
+            'category_id' => $dto->categoryId,
             'title' => $dto->title,
             'description' => $dto->description,
             'content' => $dto->content,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin\v1\Posts;
 
+use App\Http\Resources\Admin\v1\Category\CategoryResource;
 use App\Http\Resources\FileResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -23,6 +24,7 @@ class ShowResource extends JsonResource
             'view' => $this->view,
             'shared' => $this->shared,
             'recommended' => $this->recommended,
+            'category' => new CategoryResource($this->category),
             'files' => FileResource::collection($this->files)
         ];
     }
