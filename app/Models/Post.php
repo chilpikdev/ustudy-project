@@ -18,6 +18,7 @@ class Post extends Model
 
     protected $fillable = [
         'user_id',
+        'category_id',
         'title',
         'description',
         'content',
@@ -71,5 +72,10 @@ class Post extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'fileable');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

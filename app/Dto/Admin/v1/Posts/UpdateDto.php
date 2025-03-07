@@ -14,6 +14,7 @@ readonly class UpdateDto
         public bool $recommended,
         public ?array $files,
         public ?array $tags,
+        public ?int $categoryId,
     ) {
     }
 
@@ -27,6 +28,7 @@ readonly class UpdateDto
             recommended: $request->get('recommended'),
             files: $request->file('files'),
             tags: $request->get('tags'),
+            categoryId: $request->get('category_id'),
         );
     }
 }
