@@ -22,6 +22,8 @@ Route::pattern('username', '[a-z0-9_-]{3,16}');
 Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'posts']);
     Route::get('show/{id}', [PostController::class, 'show']);
+    Route::get('/recommended', [PostController::class, 'recommended']);
+
 });
 
 /**
@@ -61,5 +63,7 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_TOKEN->
             Route::delete('delete/{id}', [CommentController::class, 'delete']);
         });
     });
+
+
 });
 
