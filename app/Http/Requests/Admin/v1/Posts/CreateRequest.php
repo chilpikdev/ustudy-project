@@ -32,7 +32,8 @@ class CreateRequest extends FormRequest
             'files' => 'required|array|max:5',
             'files.*' => 'required|file|mimes:png,jpg|max:4096',
             'tags' => 'nullable|array',
-            'tags.*' => 'required|numeric|exists:tags,id'
+            'tags.*' => 'required|numeric|exists:tags,id',
+            'category_id' => 'required|numeric|exists:categories,id',
         ];
     }
 }

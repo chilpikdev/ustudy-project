@@ -13,6 +13,7 @@ readonly class CreateDto
         public ?bool $recommended,
         public array $files,
         public ?array $tags,
+        public ?int $categoryId,
     ) {
     }
 
@@ -25,6 +26,7 @@ readonly class CreateDto
             recommended: $request->get('recommended'),
             files: $request->file('files'),
             tags: $request->get('tags'),
+            categoryId: $request->get('category_id'),
         );
     }
 }
