@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Core;
 
 use App\Actions\Core\v1\Posts\IndexAction;
 use App\Actions\Core\v1\Posts\ShowAction;
-use App\Actions\Core\v1\Posts\ShowRecommendedAction;
+use App\Actions\Core\v1\Posts\RecommendedAction;
 use App\Dto\Core\v1\Posts\IndexDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Core\v1\Posts\IndexRequest;
@@ -28,9 +28,13 @@ class PostController extends Controller
         return $action($id);
     }
 
-
-    public function showRecommendedPosts(ShowRecommendedAction $action)
+    /**
+     * Summary of recommended
+     * @param \App\Actions\Core\v1\Posts\RecommendedAction $action
+     * @return JsonResponse
+     */
+    public function recommended(RecommendedAction $action): JsonResponse
     {
-        return $action->showLatestRecommendedPosts();
+        return $action();
     }
 }
