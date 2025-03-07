@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Core;
 
 use App\Actions\Core\v1\Posts\IndexAction;
 use App\Actions\Core\v1\Posts\ShowAction;
+use App\Actions\Core\v1\Posts\ShowRecommendedAction;
 use App\Dto\Core\v1\Posts\IndexDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Core\v1\Posts\IndexRequest;
-use App\Services\PostService;
 use Illuminate\Http\JsonResponse;
 
 class PostController extends Controller
@@ -28,16 +28,9 @@ class PostController extends Controller
         return $action($id);
     }
 
-    protected $postService;
 
-    public function __construct(PostService $postService)
+    public function showRecommendedPosts(ShowRecommendedAction $action)
     {
-        $this->postService = $postService;
-    }
-
-    public function showRecommendedPosts(): JsonResponse
-    {
-        $posts = $this->postService->getLatestRecommendedPosts();
-        return response()->json($posts);
+        return $action->showLatestRecommendedPosts();
     }
 }
