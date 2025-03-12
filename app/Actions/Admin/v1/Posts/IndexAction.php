@@ -36,11 +36,11 @@ class IndexAction
                 case 'recommended':
                 case 'created_at':
                     $items->orderBy($dto->orderBy, $dto->sort);
-                    break; 
-                case 'category': 
+                    break;
+                case 'category':
                     $items->join('categories', 'posts.category_id', '=', 'categories.id')
                             ->orderBy('categories.name', $dto->sort)
-                            ->select('posts.*'); 
+                            ->select('posts.*');
                     break;
                 default:
                     $items->orderByDesc('created_at');
