@@ -29,6 +29,13 @@ class IndexAction
                 $items->whereBetween('created_at', [$dto->from, $dto->to]);
             }
 
+            if ($dto->tag) {
+                $tag = $dto->tag;
+                $items->whereHas('tags', function ($query) use ($tag) {
+                    $query->where('name', $tag);
+                });
+            }
+
             switch ($dto->sort) {
                 case 'popular':
                     $items

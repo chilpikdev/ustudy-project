@@ -27,6 +27,7 @@ class IndexRequest extends FormRequest
         return [
             'perpage' => 'nullable|integer|min:1|max:50',
             'page' => ['nullable', 'integer', 'min:1'],
+            'tag' => 'nullable|string|exists:tags,name',
             'search' => 'nullable|string|min:4',
             'from' => 'nullable|date|date_format:Y-m-d|required_with:to',
             'to' => 'nullable|date|date_format:Y-m-d|required_with:from',
