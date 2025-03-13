@@ -20,6 +20,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'recommended' => $this->recommended,
+            'shared' => $this->shared,
             'category' => new CategoryResource($this->category),
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];

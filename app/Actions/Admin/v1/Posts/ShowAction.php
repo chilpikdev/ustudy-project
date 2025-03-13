@@ -15,10 +15,20 @@ class ShowAction
 {
     use GenerateKeyCacheTrait, ResponseTrait;
 
+    /**
+     * Summary of __invoke
+     * @param int $id
+     * @throws \App\Exceptions\ApiResponseException
+     * @return JsonResponse
+     */
     public function __invoke(int $id): JsonResponse
     {
         try {
-            $data = Cache::remember('posts:show' . $this->generateKey(), now()->addDay(), function () use ($id) {
+            $identifier = auth('sanctum')->check() ? "user_" . auth('sanctum')->id() : "ip_" . request()->ip();
+
+            $cacheKey = "posts_show:{$id}:{$identifier}";
+
+            $data = Cache::remember($cacheKey . $this->generateKey(), now()->addDay(), function () use ($id) {
                 return Post::findOrFail($id);
             });
 
