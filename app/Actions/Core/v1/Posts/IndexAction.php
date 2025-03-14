@@ -28,6 +28,13 @@ class IndexAction
                 $items->whereBetween('created_at', [$dto->from, $dto->to]);
             }
 
+            if ($dto->tagId) {
+                $tag = $dto->tagId;
+                $items->whereHas('tags', function ($query) use ($tag) {
+                    $query->where('tag_id', $tag);
+                });
+            }
+
             switch ($dto->sort) {
                 case 'popular':
                     $items
