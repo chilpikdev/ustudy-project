@@ -30,6 +30,7 @@ class ShowResource extends JsonResource
             'recommended' => $this->recommended,
             'category' => new CategoryResource($this->category),
             'reading_time' => $this->calculateTime($this->content),
+            'slug' => $this->slug,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }

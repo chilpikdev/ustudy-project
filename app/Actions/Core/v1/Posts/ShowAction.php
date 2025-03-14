@@ -29,7 +29,7 @@ class ShowAction
             $cacheKey = "posts:show:{$slug}:{$identifier}";
 
             $data = $this->remember($cacheKey, function () use ($slug, $cacheKey) {
-                $data = Post::whereRaw("LOWER(REPLACE(REGEXP_REPLACE(title, '[^a-zA-Z0-9 ]', ''), ' ', '-')) = ?", $slug)->firstOrFail();
+                $data = Post::where('slug', $slug)->firstOrFail();
                 
                 if (!Redis::keys("*$cacheKey*")) {
                     $data->increment('view');

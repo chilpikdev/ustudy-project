@@ -28,6 +28,7 @@ class PostResource extends JsonResource
             'tags' => new TagCollection($this->tags),
             'category' => new CategoryResource($this->category),
             'reading_time' => $this->calculateTime($this->content),
+            'slug' => $this->slug,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }
