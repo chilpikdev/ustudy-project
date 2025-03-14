@@ -25,6 +25,7 @@ class Post extends Model
         'view',
         'shared',
         'recommended',
+        'slug',
         'created_at',
         'updated_at',
     ];

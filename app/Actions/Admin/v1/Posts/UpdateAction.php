@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 
 class UpdateAction
 {
@@ -25,6 +26,7 @@ class UpdateAction
                 'content' => $dto->content,
                 'recommended' => $dto->recommended,
                 'category_id' => $dto->categoryId,
+                'slug' => Str::slug($dto->title),
             ];
 
             $item->update($data);
