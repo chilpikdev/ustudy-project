@@ -2,21 +2,20 @@
 
 namespace App\Actions\Admin\v1\Posts;
 
-use App\Actions\Traits\GenerateKeyCacheTrait;
+use App\Actions\Traits\CacheTrait;
 use App\Dto\Admin\v1\Posts\IndexDto;
 use App\Http\Resources\Admin\v1\Posts\PostCollection;
 use App\Models\Post;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Cache;
 
 class IndexAction
 {
-    use GenerateKeyCacheTrait, ResponseTrait;
+    use ResponseTrait, CacheTrait;
 
     public function __invoke(IndexDto $dto): JsonResponse
     {
-        $data = Cache::remember('posts' . $this->generateKey(), now()->addDay(), function () use ($dto) {
+        $data = $this->remember('posts', function () use ($dto) {
             $items = Post::query();
 
             if ($dto->search) {
@@ -36,11 +35,11 @@ class IndexAction
                 case 'recommended':
                 case 'created_at':
                     $items->orderBy($dto->orderBy, $dto->sort);
-                    break; 
-                case 'category': 
+                    break;
+                case 'category':
                     $items->join('categories', 'posts.category_id', '=', 'categories.id')
                             ->orderBy('categories.name', $dto->sort)
-                            ->select('posts.*'); 
+                            ->select('posts.*');
                     break;
                 default:
                     $items->orderByDesc('created_at');
