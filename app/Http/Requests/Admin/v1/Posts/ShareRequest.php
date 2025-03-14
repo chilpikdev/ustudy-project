@@ -26,8 +26,6 @@ class ShareRequest extends FormRequest
     {
         return [
             'post_id' => 'required|integer|exists:posts,id',
-            'users_id' => 'required|array',
-            'users_id.*' => 'required|integer|exists:users,id',
         ];
     }
 }
