@@ -74,6 +74,10 @@ class Post extends Model
         return $this->morphMany(File::class, 'fileable');
     }
 
+    /**
+     * Summary of category
+     * @return BelongsTo<Category, Post>
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
