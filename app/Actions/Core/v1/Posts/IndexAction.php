@@ -29,10 +29,10 @@ class IndexAction
                 $items->whereBetween('created_at', [$dto->from, $dto->to]);
             }
 
-            if ($dto->tag) {
-                $tag = $dto->tag;
+            if ($dto->tagId) {
+                $tag = $dto->tagId;
                 $items->whereHas('tags', function ($query) use ($tag) {
-                    $query->where('name', $tag);
+                    $query->where('tag_id', $tag);
                 });
             }
 

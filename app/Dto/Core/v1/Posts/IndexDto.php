@@ -9,7 +9,7 @@ readonly class IndexDto
     public function __construct(
         public ?int $perPage,
         public ?int $page,
-        public ?string $tag,
+        public ?int $tagId,
         public ?string $search,
         public ?string $from,
         public ?string $to,
@@ -21,7 +21,7 @@ readonly class IndexDto
         return new self(
             perPage: $request->get('perpage'),
             page: $request->get('page'),
-            tag: $request->get('tag'),
+            tagId: $request->get('tag_id'),
             search: $request->get('search'),
             from: $request->get('from'),
             to: $request->get('to'),
