@@ -14,17 +14,23 @@ use Illuminate\Support\Facades\Redis;
 class ShowAction
 {
     use ResponseTrait, CacheTrait;
-
-    public function __invoke(int $id): JsonResponse
+    
+    /**
+     * Summary of __invoke
+     * @param string $slug
+     * @throws \App\Exceptions\ApiResponseException
+     * @return JsonResponse
+     */
+    public function __invoke(string $slug): JsonResponse
     {
         try {
             $identifier = auth('sanctum')->check() ? "user_" . auth('sanctum')->id() : "ip_" . request()->ip(); //if user is exist, get user_id. If not exist, get ip
 
-            $cacheKey = "posts:show:{$id}:{$identifier}";
+            $cacheKey = "posts:show:{$slug}:{$identifier}";
 
-            $data = $this->remember($cacheKey, function () use ($id, $cacheKey) {
-                $data = Post::findOrFail($id);
-
+            $data = $this->remember($cacheKey, function () use ($slug, $cacheKey) {
+                $data = Post::whereRaw("LOWER(REPLACE(REGEXP_REPLACE(title, '[^a-zA-Z0-9 ]', ''), ' ', '-')) = ?", $slug)->firstOrFail();
+                
                 if (!Redis::keys("*$cacheKey*")) {
                     $data->increment('view');
                 }
