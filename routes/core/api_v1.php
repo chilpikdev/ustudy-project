@@ -24,6 +24,7 @@ Route::prefix('posts')->group(function () {
     Route::get('show/{id}', [PostController::class, 'show']);
     Route::get('/recommended', [PostController::class, 'recommended']);
 
+    Route::post('share', [PostController::class, 'share']);
 });
 
 /**
