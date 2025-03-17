@@ -26,9 +26,9 @@ class PostController extends Controller
     /**
      * Summary of show
      */
-    public function show(int $id, ShowAction $action): JsonResponse
+    public function show(string $slug, ShowAction $action): JsonResponse
     {
-        return $action($id);
+        return $action($slug);
     }
 
     /**

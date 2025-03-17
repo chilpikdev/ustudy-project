@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('view')->default(0);
             $table->bigInteger('shared')->default(0);
             $table->boolean('recommended')->default(false);
+            $table->string('slug')->unique();
             $table->timestamps();
             $table->softDeletes();
         });

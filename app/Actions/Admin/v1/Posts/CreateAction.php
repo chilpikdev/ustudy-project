@@ -7,6 +7,7 @@ use App\Helpers\FileUploadHelper;
 use App\Models\Post;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 
 class CreateAction
 {
@@ -20,6 +21,7 @@ class CreateAction
             'title' => $dto->title,
             'description' => $dto->description,
             'content' => $dto->content,
+            'slug' => Str::slug($dto->title),
         ];
 
         if ($dto->recommended) {
