@@ -1,0 +1,428 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "UStudy Project Documentation",
+        "description": "UStudy Project Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "local server"
+        }
+    ],
+    "paths": {
+        "/admin/v1/posts": {
+            "get": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Get filtered posts",
+                "description": "Summary of index",
+                "operationId": "2b1a3b2c4db7b69caa822ea30399232c",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "nullable|string"
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "nullable|date y-m-d"
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "nullable|date y-m-d"
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "description": "nullable|string"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "nullable|asc, desc"
+                    },
+                    {
+                        "name": "perpage",
+                        "in": "query",
+                        "description": "nullable|int"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "nullable|int"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminIndexRequest"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/posts/create": {
+            "post": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Create Post",
+                "description": "Not done",
+                "operationId": "29984fb46eb0b476086b96556c217451",
+                "responses": {
+                    "200": {
+                        "description": "Post Created"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/posts/show/{id}": {
+            "get": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Get Post Details",
+                "description": "Summary of show",
+                "operationId": "f8b74d36441bb75674937215d2a5968e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Post ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post details"
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/posts/update": {
+            "put": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Create Post",
+                "description": "Not done",
+                "operationId": "d5c73b16f215987522a9e6457c0a7e62",
+                "responses": {
+                    "200": {
+                        "description": "Post Updated"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/posts/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Delete Post Details",
+                "description": "Summary of delete",
+                "operationId": "5ceb6a1cb630e29c94a8eadfa4da9cd7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Post ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post deleted"
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/posts/share": {
+            "post": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Share Post",
+                "description": "Summary of share",
+                "operationId": "b904c3d78890ec99e1b4e32951b17004",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "post_id"
+                                ],
+                                "properties": {
+                                    "post_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Post shared"
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/core/v1/posts": {
+            "get": {
+                "tags": [
+                    "Posts Core"
+                ],
+                "summary": "Retrieve all posts",
+                "description": "Summary of posts",
+                "operationId": "c41ccd719fafe733860aba8c528ad7be",
+                "responses": {
+                    "200": {
+                        "description": "Post collection with pagination"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/core/v1/posts/show/{slug}": {
+            "get": {
+                "tags": [
+                    "Posts Core"
+                ],
+                "summary": "Post by slug detail",
+                "description": "Summary of show",
+                "operationId": "736ba7b5369d09987bd0948df29fc035",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "The slug of the post",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "my-first-post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post by slug"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/core/v1/posts/recommended": {
+            "get": {
+                "tags": [
+                    "Posts Core"
+                ],
+                "summary": "5 Latest recommended post",
+                "description": "Summary of recommended",
+                "operationId": "e7f38bd5c1152ba41265ac3346ceb666",
+                "responses": {
+                    "200": {
+                        "description": "5 Latest recommended post"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AdminIndexRequest": {
+                "properties": {
+                    "status": {
+                        "type": "integer",
+                        "example": 200
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": null,
+                        "nullable": true
+                    },
+                    "data": {
+                        "properties": {
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 105
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Yangi post"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Post description"
+                                        },
+                                        "recommended": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "shared": {
+                                            "type": "integer",
+                                            "example": 0
+                                        },
+                                        "category": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Technology"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "reading_time": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2025-03-18 10:41:41"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "pagination": {
+                                "properties": {
+                                    "current_page": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "per_page": {
+                                        "type": "integer",
+                                        "example": 15
+                                    },
+                                    "last_page": {
+                                        "type": "integer",
+                                        "example": 7
+                                    },
+                                    "total": {
+                                        "type": "integer",
+                                        "example": 103
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Posts Admin",
+            "description": "Posts Admin"
+        },
+        {
+            "name": "Posts Core",
+            "description": "Posts Core"
+        }
+    ]
+}
