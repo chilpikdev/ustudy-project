@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Dto\Admin\v1\Posts;
+namespace App\Dto\Core\v1\Posts;
 
-use App\Http\Requests\Admin\v1\Posts\ShareRequest;
+use App\Http\Requests\Core\v1\Posts\ShareRequest;
 
 readonly class ShareDto
 {
@@ -15,11 +15,7 @@ readonly class ShareDto
     ) {
     }
 
-    /**
-     * Summary of from
-     * @param \App\Http\Requests\Admin\v1\Posts\ShareRequest $request
-     * @return ShareDto
-     */
+
     public static function from(ShareRequest $request): self
     {
         return new self(

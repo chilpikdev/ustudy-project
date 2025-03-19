@@ -5,18 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\Admin\v1\Posts\CreateAction;
 use App\Actions\Admin\v1\Posts\DeleteAction;
 use App\Actions\Admin\v1\Posts\IndexAction;
-use App\Actions\Admin\v1\Posts\ShareAction;
 use App\Actions\Admin\v1\Posts\ShowAction;
 use App\Actions\Admin\v1\Posts\UpdateAction;
 use App\Dto\Admin\v1\Posts\CreateDto;
 use App\Dto\Admin\v1\Posts\IndexDto;
-use App\Dto\Admin\v1\Posts\ShareDto;
 use App\Dto\Admin\v1\Posts\UpdateDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\v1\Category\UpdateRequest;
 use App\Http\Requests\Admin\v1\Posts\CreateRequest;
 use App\Http\Requests\Admin\v1\Posts\IndexRequest;
-use App\Http\Requests\Admin\v1\Posts\ShareRequest;
 use Illuminate\Http\JsonResponse;
 
 class PostController extends Controller
@@ -74,10 +71,5 @@ class PostController extends Controller
     public function delete(int $id, DeleteAction $action): JsonResponse
     {
         return $action($id);
-    }
-
-    public function share(ShareRequest $request, ShareAction $action)
-    {
-        return $action(ShareDto::from($request));
     }
 }
