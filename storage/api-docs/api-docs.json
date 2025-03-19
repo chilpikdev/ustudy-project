@@ -1,0 +1,394 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "UStudy Project Documentation",
+        "description": "UStudy Project Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "local server"
+        }
+    ],
+    "paths": {
+        "/admin/v1/categories": {
+            "get": {
+                "tags": [
+                    "Categories Admin"
+                ],
+                "summary": "All categories",
+                "description": "All categories",
+                "operationId": "66540229970635fcf671fc82f9763481",
+                "responses": {
+                    "200": {
+                        "description": "Kategoriyalar dizimi"
+                    },
+                    "401": {
+                        "description": "Not allowed"
+                    },
+                    "404": {
+                        "description": "Kategoriya tabilmadi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/categories/create": {
+            "post": {
+                "tags": [
+                    "Categories Admin"
+                ],
+                "summary": "Kateogriya jaratiw",
+                "description": "Kategoriya jaratiw",
+                "operationId": "649f92469b855c1c9eb2bb2c76ffa420",
+                "requestBody": {
+                    "description": "Category jaratiw ushin mag'liwmatlar",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Jan'a category"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Kategoriya jaratiw"
+                    },
+                    "401": {
+                        "description": "Not allowed"
+                    },
+                    "404": {
+                        "description": "Kategoriya tabilmadi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/categories/update/{id}": {
+            "put": {
+                "tags": [
+                    "Categories Admin"
+                ],
+                "summary": "Kategoriya jan'alaw",
+                "description": "Update the specified resource in storage.",
+                "operationId": "43c3f2a9c73f4fa81ac8174cbe251bb4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Jan'a kotegoriya ati"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Kategoriya jan'alandi"
+                    },
+                    "401": {
+                        "description": "Not allowed"
+                    },
+                    "404": {
+                        "description": "Kategoriya tabilmadi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/categories/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Categories Admin"
+                ],
+                "summary": "Kategoriya o'shiriw",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "d3941100ab46201a6de7663809c5a8fd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kategoriya o'shirildi"
+                    },
+                    "401": {
+                        "description": "Not allowed"
+                    },
+                    "404": {
+                        "description": "Kategoriya tabilmadi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/core/v1/comment/create": {
+            "post": {
+                "tags": [
+                    "Comments Core"
+                ],
+                "summary": "Kommentariya jaratiw",
+                "description": "Kommentariya jaratiw",
+                "operationId": "4c746f63ebe4458c8ca49d03a6b18eb7",
+                "requestBody": {
+                    "description": "Kommentariya jaratiw ushin mag'liwmatlar",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "content",
+                                    "post_id"
+                                ],
+                                "properties": {
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Jan'a kommentariya"
+                                    },
+                                    "post_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Kommentariya jaratildi"
+                    },
+                    "401": {
+                        "description": "Not allowed"
+                    },
+                    "404": {
+                        "description": "Kommentariya tabilmadi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/core/v1/comment/update": {
+            "put": {
+                "tags": [
+                    "Comments Core"
+                ],
+                "summary": "Kommentariyani jan'alaw",
+                "description": "Summary of update",
+                "operationId": "304dafffdcf9cd9cdff9026ac17e4a62",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "content",
+                                    "post_id"
+                                ],
+                                "properties": {
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Jan'a kotegoriya jaziw"
+                                    },
+                                    "comment_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Kommentariya jan'alandi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not allowed"
+                    },
+                    "404": {
+                        "description": "Kategoriya tabilmadi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/core/v1/comment/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Comments Core"
+                ],
+                "summary": "Kommentariyani o'shiriw",
+                "description": "Summary of delete",
+                "operationId": "fed3f1f90b7f76f99fa9c76ef7868530",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kommentariya o'shirildi"
+                    },
+                    "401": {
+                        "description": "Not allowed"
+                    },
+                    "404": {
+                        "description": "Kommentariya tabilmadi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Category": {
+                "description": "Kategoriya modeli",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Kategoriya ati"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Comment": {
+                "description": "Comment modeli",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "Kommentariya"
+                    },
+                    "user_id": {
+                        "type": "string",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Categories Admin",
+            "description": "Categories Admin"
+        },
+        {
+            "name": "Comments Core",
+            "description": "Comments Core"
+        }
+    ]
+}
