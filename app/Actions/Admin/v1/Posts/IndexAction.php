@@ -20,12 +20,12 @@ class IndexAction
 
             if ($dto->search) {
                 $items
-                    ->where('title', 'LIKE', '%' . $dto->search . '%')
-                    ->orWhere('description', 'LIKE', '%' . $dto->search . '%');
+                    ->where('posts.title', 'LIKE', '%' . $dto->search . '%')
+                    ->orWhere('posts.description', 'LIKE', '%' . $dto->search . '%');
             }
 
             if ($dto->from) {
-                $items->whereBetween('created_at', [$dto->from, $dto->to]);
+                $items->whereBetween('posts.created_at', [$dto->from, $dto->to]);
             }
 
             switch ($dto->orderBy) {
