@@ -11,7 +11,6 @@ use App\Http\Requests\Admin\v1\Auth\LoginRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use OpenApi\Attributes as OA;
 
-
 class AuthController extends Controller
 {
     #[OA\Post(
