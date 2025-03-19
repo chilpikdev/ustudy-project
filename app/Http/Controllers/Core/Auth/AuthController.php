@@ -61,7 +61,7 @@ class AuthController extends Controller
     }
 
     #[OA\Post(
-        path: '/core/v1/auth/refreshToken',
+        path: '/core/v1/auth/refresh-token',
         description: "Access tokendi jan'alaw",
         tags: ["Posts Core"],
         summary: "Refresh token",

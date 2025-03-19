@@ -33,11 +33,11 @@
                                 "properties": {
                                     "phone": {
                                         "type": "numeric",
-                                        "example": "998913757413"
+                                        "example": "998981600609"
                                     },
                                     "password": {
                                         "type": "string",
-                                        "example": "password123"
+                                        "example": "12345678"
                                     }
                                 },
                                 "type": "object"
@@ -60,14 +60,14 @@
                 ]
             }
         },
-        "/admin/v1/auth/refreshToken": {
+        "/admin/v1/auth/refresh-token": {
             "post": {
                 "tags": [
                     "Posts Admin"
                 ],
                 "summary": "Refresh token",
                 "description": "Access tokendi jan'alaw",
-                "operationId": "109d90530d87ff5065c317f82a283d9c",
+                "operationId": "4db29789cd950b33fbd0f498a60416e7",
                 "responses": {
                     "200": {
                         "description": "Token updated"
@@ -150,11 +150,11 @@
                                 "properties": {
                                     "phone": {
                                         "type": "numeric",
-                                        "example": "998913757413"
+                                        "example": "998981600609"
                                     },
                                     "password": {
                                         "type": "string",
-                                        "example": "password123"
+                                        "example": "12345678"
                                     }
                                 },
                                 "type": "object"
@@ -177,14 +177,14 @@
                 ]
             }
         },
-        "/core/v1/auth/refreshToken": {
+        "/core/v1/auth/refresh-token": {
             "post": {
                 "tags": [
                     "Posts Core"
                 ],
                 "summary": "Refresh token",
                 "description": "Access tokendi jan'alaw",
-                "operationId": "cb3702478246012559f446889f2f1e09",
+                "operationId": "699675efeb855c9ecac4a99844245ca5",
                 "responses": {
                     "200": {
                         "description": "Token updated"
@@ -208,18 +208,6 @@
                 "summary": "Get authenticated user",
                 "description": "Usi user haqqinda mag'liwmat aliw",
                 "operationId": "41a7318ddf8196f711332d296d5be8e4",
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "query",
-                        "description": "Post sarlavhasi",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK"
