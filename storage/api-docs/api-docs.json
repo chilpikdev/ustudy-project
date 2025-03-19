@@ -1,0 +1,282 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "UStudy Project Documentation",
+        "description": "UStudy Project Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "local server"
+        }
+    ],
+    "paths": {
+        "/admin/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Admin login",
+                "description": "Admin login qiliw",
+                "operationId": "7318fa85fa8e5eb94b5d60f1d221bf29",
+                "requestBody": {
+                    "description": "Login qiliw ushin kerekli mag'liwmatlar",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "phone",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "phone": {
+                                        "type": "numeric",
+                                        "example": "998913757413"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/auth/refreshToken": {
+            "post": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Refresh token",
+                "description": "Access tokendi jan'alaw",
+                "operationId": "109d90530d87ff5065c317f82a283d9c",
+                "responses": {
+                    "200": {
+                        "description": "Token updated"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/auth/me": {
+            "get": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Get authenticated admin",
+                "description": "Usi paydalaniwshi haqqinda mag'liwmat aliw",
+                "operationId": "d3aa905659ce9795ba290523777acc18",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/admin/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "Posts Admin"
+                ],
+                "summary": "Logout admin",
+                "description": "Admin sessiyasin juwmaqlaw",
+                "operationId": "0d026e65b77c573fb7785ef1d6de5f73",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/core/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Posts Core"
+                ],
+                "summary": "User login",
+                "description": "Userdi login qiliw",
+                "operationId": "817bc9a8bdede5feb01f5bcbc89b3c90",
+                "requestBody": {
+                    "description": "Login qiliw ushin mag'liwmatlar",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "phone",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "phone": {
+                                        "type": "numeric",
+                                        "example": "998913757413"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/core/v1/auth/refreshToken": {
+            "post": {
+                "tags": [
+                    "Posts Core"
+                ],
+                "summary": "Refresh token",
+                "description": "Access tokendi jan'alaw",
+                "operationId": "cb3702478246012559f446889f2f1e09",
+                "responses": {
+                    "200": {
+                        "description": "Token updated"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/core/v1/auth/me": {
+            "get": {
+                "tags": [
+                    "Posts Core"
+                ],
+                "summary": "Get authenticated user",
+                "description": "Usi user haqqinda mag'liwmat aliw",
+                "operationId": "41a7318ddf8196f711332d296d5be8e4",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "Post sarlavhasi",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/core/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "Posts Core"
+                ],
+                "summary": "User logout",
+                "description": "Userdi logout qiliw",
+                "operationId": "f10097ac72d029f0013653759f34b643",
+                "responses": {
+                    "200": {
+                        "description": "Succesfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Posts Admin",
+            "description": "Posts Admin"
+        },
+        {
+            "name": "Posts Core",
+            "description": "Posts Core"
+        }
+    ]
+}
