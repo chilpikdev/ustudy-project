@@ -85,8 +85,72 @@
                     "Posts Admin"
                 ],
                 "summary": "Create Post",
-                "description": "Not done",
+                "description": "Summary of create",
                 "operationId": "29984fb46eb0b476086b96556c217451",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "content",
+                                    "files[]",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    },
+                                    "recommended": {
+                                        "type": "boolean",
+                                        "enum": [
+                                            "1"
+                                        ],
+                                        "example": "--",
+                                        "nullable": true
+                                    },
+                                    "files[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        },
+                                        "maxItems": 5
+                                    },
+                                    "tags[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": []
+                                    },
+                                    "category_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "encoding": {
+                                "tags[]": {
+                                    "style": "form",
+                                    "explode": true
+                                },
+                                "files[]": {
+                                    "style": "form",
+                                    "explode": true
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Post Created"
@@ -141,13 +205,93 @@
             }
         },
         "/admin/v1/posts/update": {
-            "put": {
+            "post": {
                 "tags": [
                     "Posts Admin"
                 ],
                 "summary": "Create Post",
-                "description": "Not done",
-                "operationId": "d5c73b16f215987522a9e6457c0a7e62",
+                "description": "Summary of update",
+                "operationId": "0e0ea0a6aa232ecff88ce495389b6dac",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "title",
+                                    "description",
+                                    "content",
+                                    "recommended",
+                                    "category_id",
+                                    "_method"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    },
+                                    "recommended": {
+                                        "type": "boolean",
+                                        "enum": [
+                                            "0",
+                                            "1"
+                                        ],
+                                        "example": "0",
+                                        "nullable": false
+                                    },
+                                    "files[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        },
+                                        "maxItems": 5,
+                                        "example": []
+                                    },
+                                    "tags[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": []
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "_method": {
+                                        "type": "string",
+                                        "enum": [
+                                            "PUT"
+                                        ],
+                                        "example": "PUT",
+                                        "nullable": false
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "encoding": {
+                                "tags[]": {
+                                    "style": "form",
+                                    "explode": true
+                                },
+                                "files[]": {
+                                    "style": "form",
+                                    "explode": true
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Post Updated"

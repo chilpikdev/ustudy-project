@@ -13,7 +13,7 @@ use App\Dto\Admin\v1\Posts\IndexDto;
 use App\Dto\Admin\v1\Posts\ShareDto;
 use App\Dto\Admin\v1\Posts\UpdateDto;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\v1\Category\UpdateRequest;
+use App\Http\Requests\Admin\v1\Posts\UpdateRequest;
 use App\Http\Requests\Admin\v1\Posts\CreateRequest;
 use App\Http\Requests\Admin\v1\Posts\IndexRequest;
 use App\Http\Requests\Admin\v1\Posts\ShareRequest;
@@ -61,7 +61,6 @@ class PostController extends Controller
     #[OA\Post(
         path: '/admin/v1/posts/create',
         summary: "Create Post",
-        description: "Not done",
         tags: ["Posts Admin"],
         security: [
             [
@@ -69,7 +68,34 @@ class PostController extends Controller
             ]
         ]
     )]
-    /**Request Body ----*/
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\MediaType(
+            mediaType: "multipart/form-data",
+            schema: new OA\Schema(
+                required: ["title", "description", "content", "files[]", "category_id"],
+                properties: [
+                    new OA\Property(property: "title", type: "string"),
+                    new OA\Property(property: "description", type: "string"),
+                    new OA\Property(property: "content", type: "string"),
+                    new OA\Property(property: "recommended", type: "boolean", enum: ["1"], example: "--", nullable: true),
+                    new OA\Property(property: "files[]", type: "array", maxItems: 5, items: new OA\Items(type: "string", format: "binary")),
+                    new OA\Property(property: "tags[]", type: "array", items: new OA\Items(type: "integer"), example: []),
+                    new OA\Property(property: "category_id", type: "integer")
+                ]
+            ),
+            encoding: [
+                "tags[]" => [
+                    "style" => "form",
+                    "explode" => true
+                ],
+                "files[]" => [
+                    "style" => "form",
+                    "explode" => true
+                ],
+            ]
+        )
+    )]
     #[OA\Response(
         response: 200,
         description: "Post Created",
@@ -115,9 +141,8 @@ class PostController extends Controller
         return $action($id);
     }
 
-    #[OA\Put(
+    #[OA\Post(
         path: '/admin/v1/posts/update',
-        description: "Not done",
         summary: "Create Post",
         tags: ["Posts Admin"],
         security: [
@@ -126,7 +151,36 @@ class PostController extends Controller
             ]
         ]
     )]
-    /**Request Body ----*/
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\MediaType(
+            mediaType: "multipart/form-data",
+            schema: new OA\Schema(
+                required: ["id", "title", "description", "content", "recommended", "category_id", "_method"],
+                properties: [
+                    new OA\Property(property: "id", type: "integer"),
+                    new OA\Property(property: "title", type: "string"),
+                    new OA\Property(property: "description", type: "string"),
+                    new OA\Property(property: "content", type: "string"),
+                    new OA\Property(property: "recommended", type: "boolean", enum: ["0", "1"], example: "0", nullable: false),
+                    new OA\Property(property: "files[]", type: "array", maxItems: 5, items: new OA\Items(type: "string", format: "binary"), example: []),
+                    new OA\Property(property: "tags[]", type: "array", items: new OA\Items(type: "integer"), example: []),
+                    new OA\Property(property: "category_id", type: "integer", example: 1),
+                    new OA\Property(property: "_method", type: "string", enum: ["PUT"], example: "PUT", nullable: false),
+                ]
+            ),
+            encoding: [
+                "tags[]" => [
+                    "style" => "form",
+                    "explode" => true
+                ],
+                "files[]" => [
+                    "style" => "form",
+                    "explode" => true
+                ],
+            ]
+        )
+    )]
     #[OA\Response(
         response: 200,
         description: "Post Updated",
