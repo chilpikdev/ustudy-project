@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function posts(IndexRequest $request, IndexAction $action): JsonResponse
     {
-        dd(TestFacade::test());
+        // dd(TestFacade::test());
         return $action(IndexDto::from($request));
     }
 

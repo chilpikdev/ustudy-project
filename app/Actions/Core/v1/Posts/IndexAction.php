@@ -16,7 +16,7 @@ class IndexAction
     public function __invoke(IndexDto $dto): JsonResponse
     {
         $data = $this->remember('posts', function () use ($dto) {
-            $items = Post::query();
+            $items = Post::query()->with(['tags', "category"]);
 
             if ($dto->search) {
                 $items
