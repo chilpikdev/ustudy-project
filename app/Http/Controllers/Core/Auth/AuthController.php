@@ -19,7 +19,7 @@ class AuthController extends Controller
     #[OA\Post(
         path: '/core/v1/auth/login',
         description: "Userdi login qiliw",
-        tags: ["Posts Core"],
+        tags: ["Auth Core"],
         summary: "User login",
         security: [
             ['sanctum' => []]
@@ -63,7 +63,7 @@ class AuthController extends Controller
     #[OA\Post(
         path: '/core/v1/auth/refresh-token',
         description: "Access tokendi jan'alaw",
-        tags: ["Posts Core"],
+        tags: ["Auth Core"],
         summary: "Refresh token",
         security: [
             ['sanctum' => []]
@@ -84,7 +84,7 @@ class AuthController extends Controller
     #[OA\Get(
         path: '/core/v1/auth/me',
         description: "Usi user haqqinda mag'liwmat aliw",
-        tags: ["Posts Core"],
+        tags: ["Auth Core"],
         summary: "Get authenticated user",
         security: [
             ['sanctum' => []]
@@ -105,7 +105,7 @@ class AuthController extends Controller
     #[OA\Post(
         path: '/core/v1/auth/logout',
         description: "Userdi logout qiliw",
-        tags: ["Posts Core"],
+        tags: ["Auth Core"],
         summary: "User logout",
         security: [
             ['sanctum' => []]

@@ -16,7 +16,7 @@ class AuthController extends Controller
     #[OA\Post(
         path: '/admin/v1/auth/login',
         description: "Admin login qiliw",
-        tags: ["Posts Admin"],
+        tags: ["Auth Admin"],
         summary: "Admin login",
         security: [
             ['sanctum' => []]
@@ -49,7 +49,7 @@ class AuthController extends Controller
     #[OA\Post(
         path: '/admin/v1/auth/refresh-token',
         description: "Access tokendi jan'alaw",
-        tags: ["Posts Admin"],
+        tags: ["Auth Admin"],
         summary: "Refresh token",
         security: [
             ['sanctum' => []]
@@ -70,7 +70,7 @@ class AuthController extends Controller
     #[OA\Get(
         path: '/admin/v1/auth/me',
         description: "Usi paydalaniwshi haqqinda mag'liwmat aliw",
-        tags: ["Posts Admin"],
+        tags: ["Auth Admin"],
         summary: "Get authenticated admin",
         security: [
             ['sanctum' => []]
@@ -91,7 +91,7 @@ class AuthController extends Controller
     #[OA\Post(
         path: '/admin/v1/auth/logout',
         description: "Admin sessiyasin juwmaqlaw",
-        tags: ["Posts Admin"],
+        tags: ["Auth Admin"],
         summary: "Logout admin",
         security: [
             ['sanctum' => []]
