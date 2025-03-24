@@ -126,11 +126,11 @@
                     "200": {
                         "description": "Kategoriya jan'alandi"
                     },
-                    "401": {
-                        "description": "Not allowed"
-                    },
                     "404": {
                         "description": "Kategoriya tabilmadi"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
                     }
                 },
                 "security": [
@@ -211,13 +211,13 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Kommentariya jaratildi"
-                    },
-                    "401": {
-                        "description": "Not allowed"
+                        "description": "Post shared"
                     },
                     "404": {
-                        "description": "Kommentariya tabilmadi"
+                        "description": "Post not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
                     }
                 },
                 "security": [
@@ -304,69 +304,121 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Kommentariya o'shirildi"
+                        "description": "Post by slug"
                     },
                     "401": {
-                        "description": "Not allowed"
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/core/v1/posts/recommended": {
+            "get": {
+                "tags": [
+                    "Posts Core"
+                ],
+                "summary": "5 Latest recommended post",
+                "description": "Summary of recommended",
+                "operationId": "e7f38bd5c1152ba41265ac3346ceb666",
+                "responses": {
+                    "200": {
+                        "description": "5 Latest recommended post"
                     },
-                    "404": {
-                        "description": "Kommentariya tabilmadi"
+                    "401": {
+                        "description": "Unauthenticated"
                     }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
+                }
             }
         }
     },
     "components": {
         "schemas": {
-            "Category": {
-                "description": "Kategoriya modeli",
+            "AdminIndexRequest": {
                 "properties": {
-                    "id": {
+                    "status": {
                         "type": "integer",
-                        "example": 1
+                        "example": 200
                     },
-                    "name": {
+                    "message": {
                         "type": "string",
-                        "example": "Kategoriya ati"
+                        "example": null,
+                        "nullable": true
                     },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "updated_at": {
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                },
-                "type": "object"
-            },
-            "Comment": {
-                "description": "Comment modeli",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "content": {
-                        "type": "string",
-                        "example": "Kommentariya"
-                    },
-                    "user_id": {
-                        "type": "string",
-                        "example": 1
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "updated_at": {
-                        "type": "string",
-                        "format": "date-time"
+                    "data": {
+                        "properties": {
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 105
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Yangi post"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Post description"
+                                        },
+                                        "recommended": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "shared": {
+                                            "type": "integer",
+                                            "example": 0
+                                        },
+                                        "category": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Technology"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "reading_time": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2025-03-18 10:41:41"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "pagination": {
+                                "properties": {
+                                    "current_page": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "per_page": {
+                                        "type": "integer",
+                                        "example": 15
+                                    },
+                                    "last_page": {
+                                        "type": "integer",
+                                        "example": 7
+                                    },
+                                    "total": {
+                                        "type": "integer",
+                                        "example": 103
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -383,12 +435,12 @@
     },
     "tags": [
         {
-            "name": "Categories Admin",
-            "description": "Categories Admin"
+            "name": "Posts Admin",
+            "description": "Posts Admin"
         },
         {
-            "name": "Comments Core",
-            "description": "Comments Core"
+            "name": "Posts Core",
+            "description": "Posts Core"
         }
     ]
 }
