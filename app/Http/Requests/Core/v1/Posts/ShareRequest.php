@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\v1\Posts;
+namespace App\Http\Requests\Core\v1\Posts;
 
 use App\Http\Requests\Traits\FailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +14,7 @@ class ShareRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check();
+        return true;
     }
 
     /*

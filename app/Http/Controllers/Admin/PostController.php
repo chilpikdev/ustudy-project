@@ -5,18 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\Admin\v1\Posts\CreateAction;
 use App\Actions\Admin\v1\Posts\DeleteAction;
 use App\Actions\Admin\v1\Posts\IndexAction;
-use App\Actions\Admin\v1\Posts\ShareAction;
 use App\Actions\Admin\v1\Posts\ShowAction;
 use App\Actions\Admin\v1\Posts\UpdateAction;
 use App\Dto\Admin\v1\Posts\CreateDto;
 use App\Dto\Admin\v1\Posts\IndexDto;
-use App\Dto\Admin\v1\Posts\ShareDto;
 use App\Dto\Admin\v1\Posts\UpdateDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\v1\Posts\UpdateRequest;
 use App\Http\Requests\Admin\v1\Posts\CreateRequest;
 use App\Http\Requests\Admin\v1\Posts\IndexRequest;
-use App\Http\Requests\Admin\v1\Posts\ShareRequest;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Attributes as OA;
 
@@ -224,40 +221,5 @@ class PostController extends Controller
     public function delete(int $id, DeleteAction $action): JsonResponse
     {
         return $action($id);
-    }
-
-    #[OA\Post(
-        path: "/admin/v1/posts/share",
-        summary: "Share Post",
-        tags: ["Posts Admin"],
-        security: [
-            ["sanctum" => []]
-        ],
-    )]
-    #[OA\RequestBody(
-        required: true,
-        content: new OA\MediaType(
-            mediaType: "application/json",
-            schema: new OA\Schema(
-                type: "object",
-                required: ["post_id"],
-                properties: [
-                    new OA\Property(property: "post_id", type: "integer", example: 1)
-                ]
-            )
-        )
-    )]
-    #[OA\Response(response: 200, description: "Post shared")]
-    #[OA\Response(response: 404, description: "Post not found")]
-    #[OA\Response(response: 401, description: "Unauthenticated")]
-    /**
-     * Summary of share
-     * @param \App\Http\Requests\Admin\v1\Posts\ShareRequest $request
-     * @param \App\Actions\Admin\v1\Posts\ShareAction $action
-     * @return JsonResponse
-     */
-    public function share(ShareRequest $request, ShareAction $action)
-    {
-        return $action(ShareDto::from($request));
     }
 }
