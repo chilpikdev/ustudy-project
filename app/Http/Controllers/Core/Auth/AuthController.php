@@ -12,9 +12,32 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Core\v1\Auth\LoginRequest;
 use App\Http\Requests\Core\v1\Auth\RegistrationRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use OpenApi\Attributes as OA;
 
 class AuthController extends Controller
 {
+    #[OA\Post(
+        path: '/core/v1/auth/login',
+        description: "Userdi login qiliw",
+        tags: ["Auth Core"],
+        summary: "User login",
+        security: [
+            ['sanctum' => []]
+        ]
+    )]
+    #[OA\RequestBody(
+        required: true,
+        description: "Login qiliw ushin mag'liwmatlar",
+        content: new OA\JsonContent(
+            required: ["phone", "password"],
+            properties: [
+                new OA\Property(property: "phone", type: "numeric", example: "998981600609"),
+                new OA\Property(property: "password", type: "string", example: "12345678")
+            ]
+        )
+    )]
+    #[OA\Response(response: 200, description: 'OK')]
+    #[OA\Response(response: 401, description: 'Unauthorized')]
     /**
      * Summary of login
      * @param \App\Http\Requests\Core\v1\Auth\LoginRequest $request
@@ -37,6 +60,17 @@ class AuthController extends Controller
         return $action(RegistrationDto::from($request));
     }
 
+    #[OA\Post(
+        path: '/core/v1/auth/refresh-token',
+        description: "Access tokendi jan'alaw",
+        tags: ["Auth Core"],
+        summary: "Refresh token",
+        security: [
+            ['sanctum' => []]
+        ]
+    )]
+    #[OA\Response(response: 200, description: 'Token updated')]
+    #[OA\Response(response: 401, description: 'Unauthorized')]
     /**
      * Summary of refreshToken
      * @param \App\Actions\Core\v1\Auth\RefreshTokenAction $action
@@ -47,6 +81,17 @@ class AuthController extends Controller
         return $action();
     }
 
+    #[OA\Get(
+        path: '/core/v1/auth/me',
+        description: "Usi user haqqinda mag'liwmat aliw",
+        tags: ["Auth Core"],
+        summary: "Get authenticated user",
+        security: [
+            ['sanctum' => []]
+        ]
+    )]
+    #[OA\Response(response: 200, description: 'OK')]
+    #[OA\Response(response: 401, description: 'Unauthorized')]
     /**
      * Summary of me
      * @param \App\Actions\Core\v1\Auth\GetMeAction $action
@@ -57,6 +102,17 @@ class AuthController extends Controller
         return $action();
     }
 
+    #[OA\Post(
+        path: '/core/v1/auth/logout',
+        description: "Userdi logout qiliw",
+        tags: ["Auth Core"],
+        summary: "User logout",
+        security: [
+            ['sanctum' => []]
+        ]
+    )]
+    #[OA\Response(response: 200, description: 'Succesfully')]
+    #[OA\Response(response: 401, description: 'Unauthorized')]
     /**
      * Summary of logout
      * @return mixed|\Illuminate\Http\JsonResponse
