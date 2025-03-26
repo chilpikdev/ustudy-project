@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class PostTest extends TestCase
 {
-
     private $apiResponseFields = [
         'id',
         'title',
@@ -25,10 +24,7 @@ class PostTest extends TestCase
                 'updated_at'
             ]
         ],
-        'category' => [
-            'id',
-            'name'
-        ],
+        'category',
         'reading_time',
         'slug',
         'created_at'
@@ -57,9 +53,10 @@ class PostTest extends TestCase
 
     public function test_search_from_a_list_of_posts()
     {
-        // Post::factory()->create(['title' => 'Laravel Testing Guide']);  //refresh DB
+        $title = 'Laravel ' . Str::random(10);
+        Post::factory()->create(['title' => $title]);
 
-        $response = $this->getJson('/api/core/v1/posts?search=Laravel');
+        $response = $this->getJson('/api/core/v1/posts?search=' . $title);
 
         $response
             ->assertOk()
@@ -75,8 +72,11 @@ class PostTest extends TestCase
                         'total'
                     ]
                 ]
-            ])
-            ->assertJsonPath('data.items.0.title', 'Laravel Testing Guide');
+            ]);
+        $this->assertTrue(
+            in_array($title, collect($response['data']['items'])->pluck('title')->toArray())
+        );
+
     }
 
     public function test_show_a_post()

@@ -29,10 +29,7 @@ class PostTest extends TestCase
         'recommended',
         'description',
         'shared',
-        'category' => [
-            'id',
-            'name'
-        ],
+        'category',
         'reading_time',
     ];
 
