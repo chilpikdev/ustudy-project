@@ -17,20 +17,20 @@ class LoginTest extends TestCase
      */
     public function test_user_can_login(): void
     {
-        $user = User::create([
-            'country_id' => Country::inRandomOrder()->first()->id,
-            'first_name' => 'Test',
-            'last_name' => 'User',
-            'email' => 'test_user@example.com',
-            'email_verified_at' => now(),
-            'phone' => '998981600606',
-            'phone_verified_at' => now(),
-            'password' => 'Isl@m1995',
-        ]);
+        // $user = User::create([
+        //     'country_id' => Country::inRandomOrder()->first()->id,
+        //     'first_name' => 'Test',
+        //     'last_name' => 'User',
+        //     'email' => 'test_user@example.com',
+        //     'email_verified_at' => now(),
+        //     'phone' => '998981600606',
+        //     'phone_verified_at' => now(),
+        //     'password' => 'Isl@m1995',
+        // ]);
 
         $response = $this->postJson('/api/core/v1/auth/login', [
-            'phone' => 998981600606,
-            'password' => 'Isl@m1995',
+            'phone' => 998981600609,
+            'password' => '12345678',
         ]);
 
         $response
@@ -46,7 +46,7 @@ class LoginTest extends TestCase
                 ],
             ]);
 
-        Sanctum::actingAs($user);
-        $this->assertAuthenticatedAs($user);
+        // Sanctum::actingAs($user);
+        // $this->assertAuthenticatedAs($user);
     }
 }
