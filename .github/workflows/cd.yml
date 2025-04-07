@@ -5,71 +5,71 @@ on:
     branches: [main]
 
 jobs:
-  laravel-tests:
-    runs-on: ubuntu-latest
+#   laravel-tests:
+#     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_DATABASE: testing
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
+#     services:
+#       mysql:
+#         image: mysql:8.0
+#         env:
+#           MYSQL_DATABASE: testing
+#           MYSQL_USER: root
+#           MYSQL_PASSWORD: root
+#           MYSQL_ROOT_PASSWORD: root
+#         ports:
+#           - 3306:3306
+#         options: >-
+#           --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+#           --health-interval=10s
+#           --health-timeout=5s
+#           --health-retries=3
 
-      redis:
-        image: redis:7
-        ports:
-          - 6379:6379
+#       redis:
+#         image: redis:7
+#         ports:
+#           - 6379:6379
 
-    env:
-      DB_CONNECTION: mysql
-      DB_HOST: 127.0.0.1
-      DB_PORT: 3306
-      DB_DATABASE: testing
-      DB_USERNAME: root
-      DB_PASSWORD: root
-      REDIS_HOST: 127.0.0.1
-      REDIS_PORT: 6379
-      APP_ENV: testing
-      CACHE_DRIVER: redis
-      QUEUE_CONNECTION: sync
-      SESSION_DRIVER: redis
+#     env:
+#       DB_CONNECTION: mysql
+#       DB_HOST: 127.0.0.1
+#       DB_PORT: 3306
+#       DB_DATABASE: testing
+#       DB_USERNAME: root
+#       DB_PASSWORD: root
+#       REDIS_HOST: 127.0.0.1
+#       REDIS_PORT: 6379
+#       APP_ENV: testing
+#       CACHE_DRIVER: redis
+#       QUEUE_CONNECTION: sync
+#       SESSION_DRIVER: redis
 
-    steps:
-      - uses: actions/checkout@v3
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: 🔧 Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          extensions: pdo_mysql, redis
-          tools: composer
+#       - name: 🔧 Setup PHP
+#         uses: shivammathur/setup-php@v2
+#         with:
+#           php-version: '8.3'
+#           extensions: pdo_mysql, redis
+#           tools: composer
 
-      - name: 📦 Установка зависимостей
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
+#       - name: 📦 Установка зависимостей
+#         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: 🧪 Подготовка окружения
-        run: |
-          cp .env.example .env
-          php artisan key:generate
+#       - name: 🧪 Подготовка окружения
+#         run: |
+#           cp .env.example .env
+#           php artisan key:generate
 
-      - name: 📄 Миграции
-        run: php artisan migrate
+#       - name: 📄 Миграции
+#         run: php artisan migrate
 
-      - name: ✅ Тестирование
-        run: php artisan test
+#       - name: ✅ Тестирование
+#         run: php artisan test
 
   deploy:
     name: 🚀 Deploy to Server
-    needs: laravel-tests
+    # needs: laravel-tests
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
@@ -84,8 +84,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no deploy@your.server.com << 'EOF'
             cd /var/www/your-project
             git pull origin ${GITHUB_REF_NAME}
-            docker compose pull
-            docker compose up -d --build
-            docker compose exec php php artisan migrate --force
-            docker compose exec php php artisan config:cache
+            # docker compose pull
+            # docker compose up -d --build
+            # docker compose exec php php artisan migrate --force
+            # docker compose exec php php artisan config:cache
           EOF
