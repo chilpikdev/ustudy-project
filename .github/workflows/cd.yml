@@ -81,7 +81,7 @@ jobs:
 
       - name: 📤 Деплой на сервер
         run: |
-          ssh -o StrictHostKeyChecking=no root@147.45.141.132 << 'EOF'
+          ssh -o StrictHostKeyChecking=no deploy@147.45.141.132 << 'EOF'
             cd /var/www/api.ustudy-project.uz
             git pull origin ${GITHUB_REF_NAME}
             # docker compose pull
