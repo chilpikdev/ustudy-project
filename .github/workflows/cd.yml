@@ -83,9 +83,8 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no deploy@147.45.141.132 << 'EOF'
             cd /var/www/api.ustudy-project.uz
-            whoami
-            # git config --global --add safe.directory /var/www/api.ustudy-project.uz
-            # git pull origin ${GITHUB_REF_NAME}
+            git config --global --add safe.directory /var/www/api.ustudy-project.uz
+            git pull origin ${GITHUB_REF_NAME}
             # docker compose pull
             # docker compose up -d --build
             # docker compose exec php php artisan migrate --force
