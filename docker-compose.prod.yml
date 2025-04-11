@@ -4,11 +4,12 @@ services:
     container_name: project_nginx
     volumes:
       - ./:/var/www/backend
-      - ./_docker/images/nginx/localhost:/etc/nginx/conf.d
+      - ./_docker/images/nginx/production:/etc/nginx/conf.d
       - nginx_data:/etc/nginx
       - nginx_logs:/etc/nginx/logs
     ports:
-      - 8000:80
+      - 80:80
+      - 443:443
     restart: always
     depends_on:
       - php
@@ -37,22 +38,6 @@ services:
     env_file:
         - ./_docker/images/mysql/mysql.env
     container_name: project_mysql
-    networks:
-      - project_network
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: project_pma
-    links:
-        - mysql
-    environment:
-        PMA_HOST: mysql
-        PMA_PORT: 3306
-        PMA_ARBITRARY: 1
-        UPLOAD_LIMIT: 100000000
-    restart: always
-    ports:
-        - "8081:80"
     networks:
       - project_network
 
