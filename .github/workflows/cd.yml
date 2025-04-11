@@ -108,8 +108,8 @@ jobs:
             cd /var/www/api.ustudy-project.uz
             git config --global --add safe.directory /var/www/api.ustudy-project.uz
             git pull origin ${GITHUB_REF_NAME}
-            docker compose -f docker-compose.prod.yml pull
-            docker compose -f docker-compose.prod.yml up -d --build
-            docker compose exec php php artisan migrate --force
-            docker compose exec php php artisan config:cache
+            docker-compose -f docker-compose.prod.yml pull
+            docker-compose -f docker-compose.prod.yml up -d --build
+            docker-compose exec project_php php artisan migrate --force
+            docker-compose exec project_php php artisan config:cache
           EOF
